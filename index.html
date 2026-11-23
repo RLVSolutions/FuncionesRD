@@ -743,6 +743,58 @@ body>*:not(#print){display:none!important}
 .pcf ul{margin:4px 0 0;padding-left:16px;font-size:.78rem;color:var(--muted)}
 .pcf li{margin:1px 0}
 .pmarca{border:2px dashed #b45309;color:#b45309;background:#fffbeb;padding:7px 10px;margin:0 0 12px;font-weight:700;font-size:12px;text-align:center;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.impfila{margin:6px 0 0;text-align:center}
+.fnadm{margin:4px 0 12px;padding:12px 14px;border:1px dashed var(--acc);border-radius:10px;background:var(--acc-soft)}
+.fnadm h3{margin:0;font-size:1rem}
+.fnadm ol{margin:0;padding-left:20px}
+.fnadm li{margin:0 0 8px}
+.fnadm li p{margin:3px 0 0;white-space:pre-line;color:var(--muted);font-size:.85rem}
+.chip.adm{background:#fff4d6;color:var(--warn)}
+.chip.imp{background:#e8eef5;color:#1f3a5f}
+.rev.radm .decl{border-left-color:var(--mark)}
+.chipsI .quitar{padding:1px 9px;font-size:.72rem}
+.opc{font-weight:400;color:var(--muted);font-size:.8rem}
+.adjl{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.adjl li{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--card)}
+.adjl .ext{flex:0 0 auto;font:700 .66rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;background:var(--acc);color:#fff;border-radius:6px;padding:7px 4px;min-width:40px;text-align:center}
+.adjl .adjn{flex:1;min-width:0;display:flex;flex-direction:column}
+.adjl .adjn b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.92rem}
+.adjl .adjn small{color:var(--muted);font-size:.76rem}
+.adjl .adjn .adjnota{color:var(--txt)}
+.adjl .adjb{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.btn.mini2{padding:5px 10px;font-size:.8rem;min-height:0}
+.adjsub{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.adjsub input[type=file]{flex:1 1 220px;font-size:.85rem}
+.adjsub input:not([type]){flex:1 1 200px}
+#adjTitAviso{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+#adjTitAviso[hidden]{display:none}
+.impcarga,.impleer,.impacc{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.impcarga{margin:0 0 10px}
+.impleer{margin-top:10px}
+.impacc{justify-content:flex-end}
+.imprad{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
+.imprad label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:var(--card)}
+.imprad label input{margin-top:3px;accent-color:var(--acc)}
+.imprad label small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.imprad label:has(input:checked){border-color:var(--acc);background:var(--acc-soft)}
+.imphead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.impbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.impbar select{width:auto;min-width:200px}
+.impbar .chk{display:flex;gap:6px;align-items:center;font-size:.88rem}
+.impf{display:grid;grid-template-columns:56px 170px minmax(0,1fr);gap:8px 10px;border:1px solid var(--line);border-radius:10px;padding:10px;margin:0 0 8px;background:var(--card)}
+.impf.off{opacity:.5}
+.impf textarea{grid-column:2/4;font-size:.86rem}
+.impf .ft{grid-column:2/4;display:flex;justify-content:space-between;align-items:center}
+.impf .cont{color:var(--muted);font-size:.76rem}
+.impf .cont.mal{color:var(--err);font-weight:700}
+.impchk{display:flex;gap:6px;align-items:center}
+.impchk input{width:18px;height:18px;accent-color:var(--acc)}
+.impsel{display:grid;gap:6px;max-height:55vh;overflow:auto}
+.impsel label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer}
+.impsel label input{margin-top:3px;accent-color:var(--acc)}
+.impsel small{display:block;color:var(--muted);font-size:.78rem}
+.pdoc .padm{display:inline-block;margin-left:6px;font-size:7.5pt;font-weight:400;color:#7a5200;border:.5pt solid #e0c070;border-radius:3pt;padding:0 3pt}
+@media (max-width:760px){.imprad{grid-template-columns:1fr}.impf{grid-template-columns:1fr}.impf textarea,.impf .ft{grid-column:auto}.adjl li{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -820,7 +872,9 @@ body>*:not(#print){display:none!important}
 <details class="leyenda leyMovil"><summary>¿Qué significa cada tipo? ¿Función o tarea?</summary><div class="leyCont"></div><div class="ftarea ftCont"></div></details>
 <details class="tarjeta sugMovil"><summary>Funciones sugeridas del levantamiento</summary><p class="mini">Elija su área y cargo, y toque una función para agregarla.</p><div class="sugCont"></div></details>
 <div id="funciones" aria-live="polite"></div>
+<div id="fnAdm" class="fnadm" hidden></div>
 <button type="button" id="agregar" class="btn agregar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Agregar función</button>
+<p class="impfila"><button type="button" id="impTit" class="enlace">Importar funciones desde un archivo (JSON, PDF, texto o planilla)</button><input type="file" id="impTitFile" accept=".json,.pdf,.txt,.csv,.tsv,.md" hidden></p>
 <p id="contadorF" class="contadorF"></p>
 <p style="text-align:center;margin:4px 0 0"><button type="button" class="enlace" data-acc="perfil">Ver vista previa del perfil armado</button></p>
 <p id="errFunciones" class="errBloque" role="alert" tabindex="-1" style="text-align:center"></p>
@@ -830,6 +884,13 @@ body>*:not(#print){display:none!important}
 <h2><span class="num">3</span>Comentarios y confirmación</h2>
 <div class="campo"><label for="comentarios">Comentarios generales</label><textarea id="comentarios" maxlength="2000" rows="4" placeholder="Observaciones sobre su cargo, carga de trabajo, funciones compartidas, sugerencias, etc."></textarea></div>
 <div class="campo"><label class="chk"><input type="checkbox" id="consentimiento"><span>Declaro que la información entregada es fidedigna y autorizo su uso exclusivo para fines de gestión interna de la empresa: levantamiento de funciones y elaboración de descriptores de cargo.</span></label><small class="err"></small></div>
+</section>
+<section class="tarjeta" id="secAdjuntos">
+<h2><span class="num">4</span>Documentos de respaldo <small class="opc">(opcional)</small></h2>
+<p class="sub" style="margin:-8px 0 12px">Adjunte documentos que complementen su levantamiento: descripciones propias, procedimientos, reportes o presentaciones. PDF, Word, Excel, PowerPoint, imágenes o texto, hasta 8 MB por archivo.</p>
+<div id="adjTitAviso" class="aviso"><span>Para adjuntar documentos primero guarde su avance: recibirá su ID y su clave.</span><button type="button" class="enlace" data-acc="borrador">Guardar avance</button></div>
+<div id="adjTitLista"></div>
+<div class="adjsub" id="adjTitForm" hidden><input type="file" id="adjTitFile" aria-label="Archivo"><input id="adjTitNota" maxlength="150" placeholder="Descripción breve (opcional)" aria-label="Descripción del archivo"><button type="button" id="adjTitSubir" class="btn sec">Subir archivo</button></div>
 </section>
 <div class="hp" aria-hidden="true"><label>Sitio web<input id="website" tabindex="-1" autocomplete="off"></label></div>
 </form>
@@ -913,13 +974,39 @@ body>*:not(#print){display:none!important}
 <div class="dhead">
 <div><h1>Datos</h1><p class="sub" id="dSub"></p></div>
 </div>
-<nav class="pnav" id="dTabs" aria-label="Secciones de Datos"><div class="pnav-tabs" role="tablist"><button type="button" role="tab" data-sub="reg" aria-selected="true">Registros</button><button type="button" role="tab" data-sub="desc" aria-selected="false">Descriptores</button><button type="button" role="tab" data-sub="faq" aria-selected="false">Entrenar asistente</button><button type="button" role="tab" data-sub="cfg" aria-selected="false">Configuración</button></div><div class="pnav-acc"><button type="button" id="dManual">Transcribir formulario en papel</button><button type="button" id="dRefrescar">Actualizar</button><button type="button" id="dCodigo">Cambiar código</button><button type="button" id="dSalir" class="salir">Cerrar sesión</button></div></nav>
+<nav class="pnav" id="dTabs" aria-label="Secciones de Datos"><div class="pnav-tabs" role="tablist"><button type="button" role="tab" data-sub="reg" aria-selected="true">Registros</button><button type="button" role="tab" data-sub="imp" aria-selected="false">Importar perfil</button><button type="button" role="tab" data-sub="desc" aria-selected="false">Descriptores</button><button type="button" role="tab" data-sub="faq" aria-selected="false">Entrenar asistente</button><button type="button" role="tab" data-sub="cfg" aria-selected="false">Configuración</button></div><div class="pnav-acc"><button type="button" id="dManual">Transcribir formulario en papel</button><button type="button" id="dRefrescar">Actualizar</button><button type="button" id="dCodigo">Cambiar código</button><button type="button" id="dSalir" class="salir">Cerrar sesión</button></div></nav>
 <div id="subReg">
 <section class="tarjeta">
 <div class="filtros"><input id="fTexto" type="search" placeholder="Buscar por nombre, RUT, ID o cargo" aria-label="Buscar"><select id="fSuc" aria-label="Filtrar por sucursal"></select><select id="fEstado" aria-label="Filtrar por estado"></select><span class="cuenta" id="fCuenta"></span></div>
 <div class="tablaw"><table class="tabla"><thead><tr><th>Nombre</th><th>ID</th><th>Sucursal</th><th>Área</th><th>Cargo(s)</th><th class="n">Funciones</th><th class="n">Precisiones</th><th>Actualizado</th><th>Estado</th></tr></thead><tbody id="tBody"></tbody></table></div>
 </section>
 </div>
+<section id="subImp" hidden>
+<section class="tarjeta">
+<h2 style="margin-bottom:4px">Importar perfil o funciones</h2>
+<p class="sub" style="margin:0 0 12px">Cargue el documento del colaborador en <b>PDF</b>, un <b>JSON</b> con el formato del levantamiento, una <b>planilla CSV</b> con columnas Tipo · Función · Descripción, o pegue el texto: cada función numerada (1., 2., …) con sus tareas en viñetas. Antes de importar podrá revisar y ajustar todo.</p>
+<div class="impcarga"><label class="btn sec" for="impFile">Elegir archivo</label><input type="file" id="impFile" accept=".json,.pdf,.txt,.csv,.tsv,.md" hidden><span id="impFileNom" class="mini" style="margin:0"></span><button type="button" id="impPlantilla" class="btn txt">Descargar plantilla JSON</button></div>
+<textarea id="impTexto" rows="7" class="mono" placeholder="…o pegue aquí el JSON o el texto del documento" aria-label="Contenido a importar"></textarea>
+<div class="impleer"><button type="button" id="impLeer" class="btn pri">Leer contenido</button><span id="impRes" class="mini" style="margin:0" aria-live="polite"></span></div>
+</section>
+<div id="impPaso2" hidden>
+<section class="tarjeta">
+<h2 style="margin-bottom:10px">Destino y datos del colaborador</h2>
+<div class="imprad"><label><input type="radio" name="impDest" value="registro" checked><span><b>Registro del colaborador</b><small>Crea su registro, o una nueva versión si ya existe, con las funciones marcadas. Se conservan las funciones complementarias que ya tenga.</small></span></label><label><input type="radio" name="impDest" value="complemento"><span><b>Funciones complementarias</b><small>Se agregan a su registro vigente como "agregadas por administración", sin modificar lo que declaró el colaborador.</small></span></label></div>
+<div class="g12" id="impCol"></div>
+<p class="mini" id="impExiste" aria-live="polite"></p>
+</section>
+<section class="tarjeta">
+<div class="imphead"><h2 style="margin:0">Funciones <small id="impCuenta" class="mini"></small></h2><div class="impbar"><label class="chk"><input type="checkbox" id="impTodas" checked> Marcar todas</label><select id="impTipoMasivo" aria-label="Cambiar tipo de las marcadas"></select><button type="button" id="impAgregar" class="btn txt">+ Agregar fila</button></div></div>
+<div id="impLista"></div>
+</section>
+<section class="tarjeta">
+<div class="campo"><label for="impRespaldo">Documento de respaldo (opcional)</label><input type="file" id="impRespaldo"><small class="ayuda" id="impRespNom"></small><small class="ayuda">Queda como adjunto del registro, por ejemplo el PDF original. Máximo 8 MB.</small></div>
+<p id="impErr" class="errBloque" role="alert"></p>
+<div class="impacc"><button type="button" id="impExportar" class="btn sec">Descargar JSON adaptado</button><button type="button" id="impConfirmar" class="btn pri">Importar registro</button></div>
+</section>
+</div>
+</section>
 <section id="subCfg" hidden><div class="cfggrid">
 <form id="fAjustes" class="tarjeta" novalidate><h2 style="margin-bottom:4px">Ajustes generales</h2><p class="sub" style="margin:0 0 14px">Se guardan en el servidor. No es necesario modificar archivos del repositorio.</p>
 <div class="g12">
@@ -993,13 +1080,18 @@ body>*:not(#print){display:none!important}
 </section>
 </div>
 <section class="tarjeta" style="margin-bottom:16px">
-<h2>Funciones declaradas y precisiones</h2>
+<div class="imphead"><h2 style="margin:0">Funciones declaradas y precisiones</h2><div class="impbar"><button type="button" id="detImp" class="btn txt">Importar funciones</button><button type="button" id="detCompl" class="btn sec">+ Función complementaria</button></div></div>
 <div class="leyRev"><span><i class="d"></i>Declarado por el trabajador</span><span><i class="p"></i>Precisión de revisión</span></div>
 <div id="detFunciones"></div>
 </section>
 <section class="tarjeta detcom">
 <div><span class="etq">Comentario general del trabajador</span><div class="decl" style="border-radius:8px;border:1px solid var(--line);border-left:4px solid var(--acc)"><p id="detComTrab" style="margin:0"></p></div></div>
 <div class="prec" style="border-radius:8px"><label class="etq" for="detComRev">Comentario general de revisión</label><textarea id="detComRev" maxlength="3000" rows="4" placeholder="Conclusiones, ajustes al cargo, observaciones generales"></textarea></div>
+</section>
+<section class="tarjeta" style="margin-top:16px">
+<h2>Documentos adjuntos <small id="detAdjN" class="mini"></small></h2>
+<div id="detAdj"></div>
+<div class="adjsub"><input type="file" id="detAdjFile" aria-label="Archivo"><input id="detAdjNota" maxlength="150" placeholder="Descripción breve (opcional)" aria-label="Descripción del archivo"><button type="button" id="detAdjSubir" class="btn sec">Adjuntar archivo</button></div>
 </section>
 </section>
 </main>
@@ -1677,6 +1769,8 @@ function limpiarFormulario() {
   $('bannerBorrador').hidden = true;
   reiniciarPuerta();
   reiniciarFunciones();
+  FN_ADM = [];
+  renderFnAdm();
   toggleOtro();
   toggleUnidad();
   renderFunciones();
@@ -1708,6 +1802,7 @@ function modoUI() {
   if (!EDIT) $('rut').readOnly = !MANUAL && !!RUTOK;
   bloqueo();
   avance();
+  adjTitUI();
 }
 
 function libre() {
@@ -1716,7 +1811,7 @@ function libre() {
 
 function bloqueo() {
   const l = libre();
-  ['restoDatos', 'secFunciones', 'secComentarios'].forEach(id => { $(id).inert = !l; });
+  ['restoDatos', 'secFunciones', 'secComentarios', 'secAdjuntos'].forEach(id => { $(id).inert = !l; });
 }
 
 function reiniciarPuerta() {
@@ -2536,7 +2631,9 @@ function rellenar(r) {
   $('comentarios').value = r.comentarios;
   setCargos(r.cargos || []);
   const tn = CFG.tipos.map(t => t.nombre);
-  funciones = (r.funciones || []).map(f => Object.assign(nueva(), {
+  FN_ADM = (r.funciones || []).filter(f => f.origen === ORIG_ADM);
+  renderFnAdm();
+  funciones = (r.funciones || []).filter(f => f.origen !== ORIG_ADM).map(f => Object.assign(nueva(), {
     tipo: tn.indexOf(f.tipo) >= 0 ? f.tipo : '',
     funcion: f.funcion,
     descripcion: f.descripcion
@@ -2755,7 +2852,7 @@ function imprimirRevision() {
   const meta = '<div class="pmeta">ID de registro<b>' + esc(r.id) + '</b><em>Versión ' + esc(r.version) + ' · ' + esc(r.fecha) + '</em><em>Estado: ' + esc(est) + (r.fRev ? ' · Revisado ' + esc(r.fRev) : '') + '</em></div>';
   const fns = r.funciones.map(f => {
     const p = limpio(($('p' + f.n) || {}).value);
-    return '<div class="pfn"><div class="pd"><span class="tag">Declarado por el trabajador</span><div class="pt"><b>' + f.n + '. ' + esc(f.funcion) + '</b><small>' + esc(f.tipo) + '</small></div><div class="pdesc">' + esc(f.descripcion) + '</div></div>' +
+    return '<div class="pfn"><div class="pd"><span class="tag">Declarado por el trabajador</span><div class="pt"><b>' + f.n + '. ' + esc(f.funcion) + '</b><small>' + esc(f.tipo) + (f.origen === ORIG_ADM ? ' · agregada por administración' : '') + '</small></div><div class="pdesc">' + esc(f.descripcion) + '</div></div>' +
       '<div class="pp' + (p ? '' : ' sin') + '"><span class="tag">Precisión de revisión</span>' + esc(p || 'Sin precisiones.') + '</div></div>';
   }).join('');
   const cr = limpio($('detComRev').value);
@@ -3084,14 +3181,15 @@ function renderDetalle() {
   $('detNombre').textContent = r.nombre;
   $('detSub').textContent = 'ID ' + r.id + ' · ' + r.rut + ' · versión ' + r.version + ' del ' + r.fecha;
   const c = (k, v) => '<div><dt>' + esc(k) + '</dt><dd>' + esc(v || '—') + '</dd></div>';
-  $('detDatos').innerHTML = c('Sucursal', r.sucursal) + c('Área funcional', r.unidad) + c('Cargo(s) contractual(es)', r.cargos.join(', ')) + c('Jefatura o dependencia', r.jefatura) + c('Teléfono', r.telefono) + c('Correo', r.correo) + c('Origen', r.origen === 'Manual' ? 'Formulario en papel' + (r.folio ? ' · folio ' + r.folio : '') + (r.transcrito ? ' · transcrito por ' + r.transcrito : '') : 'Formulario web');
+  $('detDatos').innerHTML = c('Sucursal', r.sucursal) + c('Área funcional', r.unidad) + c('Cargo(s) contractual(es)', r.cargos.join(', ')) + c('Jefatura o dependencia', r.jefatura) + c('Teléfono', r.telefono) + c('Correo', r.correo) + c('Origen', r.origen === 'Manual' ? 'Formulario en papel' + (r.folio ? ' · folio ' + r.folio : '') + (r.transcrito ? ' · transcrito por ' + r.transcrito : '') : r.origen === ORIG_IMP ? 'Importado desde archivo por la administración' : 'Formulario web');
   selValor($('detEstado'), r.estado);
   $('detFRev').textContent = r.fRev ? 'Última revisión guardada: ' + r.fRev : 'Aún no se guarda una revisión para esta versión.';
   $('detClaveInfo').textContent = r.clave ? 'El trabajador tiene clave asignada para modificar su registro.' : 'El trabajador no tiene clave. Genere una para que pueda modificar su registro.';
   $('detHist').innerHTML = (r.historial || []).map(h => '<li><b>Versión ' + h.version + '</b> · ' + esc(h.fecha) + ' · ' + esc(h.origen) + (h.vigente ? ' · vigente' : '') + '</li>').join('');
-  $('detFunciones').innerHTML = r.funciones.map(f => '<article class="rev"><div class="decl"><span class="etq">Declarado · función ' + f.n + '</span><h3>' + esc(f.funcion) + '</h3><div class="chipsI"><span class="chip">' + esc(f.tipo) + '</span></div><p>' + esc(f.descripcion) + '</p></div><div class="prec"><label class="etq" for="p' + f.n + '">Precisión de revisión</label><textarea id="p' + f.n + '" data-n="' + f.n + '" maxlength="1500" rows="4" placeholder="Observaciones, precisiones o correcciones a esta función">' + esc(f.precision || '') + '</textarea></div></article>').join('');
+  $('detFunciones').innerHTML = r.funciones.map(f => '<article class="rev' + (f.origen === ORIG_ADM ? ' radm' : '') + '"><div class="decl"><span class="etq">' + (f.origen === ORIG_ADM ? 'Complementaria · función ' : 'Declarado · función ') + f.n + '</span><h3>' + esc(f.funcion) + '</h3><div class="chipsI"><span class="chip">' + esc(f.tipo) + '</span>' + (f.origen === ORIG_ADM ? '<span class="chip adm">Agregada por administración</span><button type="button" class="quitar" data-quitar-compl="' + f.n + '">Quitar</button>' : f.origen === ORIG_IMP ? '<span class="chip imp">Importada</span>' : '') + '</div><p>' + esc(f.descripcion) + '</p></div><div class="prec"><label class="etq" for="p' + f.n + '">Precisión de revisión</label><textarea id="p' + f.n + '" data-n="' + f.n + '" maxlength="1500" rows="4" placeholder="Observaciones, precisiones o correcciones a esta función">' + esc(f.precision || '') + '</textarea></div></article>').join('');
   $('detComTrab').textContent = r.comentarios || 'Sin comentarios.';
   $('detComRev').value = r.comRev || '';
+  renderAdjDet();
 }
 
 $('dDetalle').addEventListener('input', ev => { if (ev.target.matches('textarea,select')) sucio = true; });
@@ -3223,6 +3321,8 @@ function irSub(sub) {
   $('subFaq').hidden = sub !== 'faq';
   $('subCfg').hidden = sub !== 'cfg';
   $('subDesc').hidden = sub !== 'desc';
+  $('subImp').hidden = sub !== 'imp';
+  if (sub === 'imp') { $('impTipoMasivo').innerHTML = '<option value="">Cambiar tipo de las marcadas…</option>' + CFG.tipos.map(t => '<option>' + esc(t.nombre) + '</option>').join(''); if (!LISTA.length) cargarLista(); }
   if (sub === 'desc') abrirDescriptores();
   if (sub === 'cfg') irCfg();
   if (sub === 'faq') abrirFaqAdmin();
@@ -4188,7 +4288,7 @@ function perfilHTML(d, meta) {
   const fun = grupos.map(t => {
     const l = d.funciones.filter(f => f.tipo === t && (f.funcion || f.descripcion));
     if (!l.length) return '';
-    return '<h3 class="pgt">' + esc(lbl(t)) + ' <small>(' + l.length + ')</small></h3><table><tbody>' + l.map(f => '<tr><td class="nn">' + (++n) + '</td><td><b>' + esc(f.funcion) + '</b>' + (f.descripcion && f.descripcion !== f.funcion ? '<div class="fd">' + esc(f.descripcion) + '</div>' : '') + '</td></tr>').join('') + '</tbody></table>';
+    return '<h3 class="pgt">' + esc(lbl(t)) + ' <small>(' + l.length + ')</small></h3><table><tbody>' + l.map(f => '<tr><td class="nn">' + (++n) + '</td><td><b>' + esc(f.funcion) + '</b>' + (f.origen === ORIG_ADM ? '<span class="padm">Agregada por administración</span>' : '') + (f.descripcion && f.descripcion !== f.funcion ? '<div class="fd">' + esc(f.descripcion) + '</div>' : '') + '</td></tr>').join('') + '</tbody></table>';
   }).join('');
   const sinTipo = d.funciones.filter(f => !f.tipo && (f.funcion || f.descripcion));
   const seg = meta.sinSeg ? '' : meta.id ? '<div class="pseg"><div><span>ID de registro</span><b>' + esc(meta.id) + '</b></div><div><span>Clave de seguimiento</span><b>' + esc(meta.clave || '········') + '</b></div><p>' + (meta.clave ? 'Conserve su ID y su clave: con ellos revisa, modifica o actualiza este perfil.' : 'La clave se entregó al guardar por primera vez; no se muestra por seguridad.') + '</p></div>' : '<div class="pseg pend"><p><b>Código de seguimiento:</b> se asignará un ID y una clave al guardar el avance o enviar el registro.</p></div>';
@@ -4206,6 +4306,7 @@ function perfilHTML(d, meta) {
 
 function verPerfil() {
   const d = datos();
+  d.funciones = d.funciones.concat(FN_ADM);
   const meta = EDIT ? { id: EDIT.id, clave: EDIT.clave, estado: EDIT.borrador ? 'Borrador' : 'Versión ' + EDIT.version } : (CRED && CRED.id === regIdDe(d.rut) ? { id: CRED.id, clave: CRED.clave, estado: 'Borrador' } : {});
   meta.sub = 'Vista previa · ' + hoy();
   dialogo('Vista previa del perfil', '<div class="pprev">' + perfilHTML(d, meta) + '</div>', [{ txt: 'Cerrar' }, { txt: 'Descargar PDF', cls: 'sec', fn: () => { cerrarModal('dlg'); imprimir(perfilHTML(d, meta), 'Perfil ' + (d.nombre || 'colaborador')); } }, { txt: 'Revisar y enviar', cls: 'pri', fn: () => { cerrarModal('dlg'); $('form').requestSubmit(); } }]);
@@ -5005,6 +5106,727 @@ $('cProbarWsp').addEventListener('click', () => {
   if (n.length < 10) { toast('Ingrese el número con código de país, por ejemplo 56912345678.', true); return; }
   window.open('https://wa.me/' + n, '_blank', 'noopener');
 });
+
+const ORIG_ADM = 'Administrador';
+const ORIG_IMP = 'Importado';
+let FN_ADM = [];
+let IMP = null;
+let ADJ_TIT = { id: '', lista: [] };
+const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+
+function sinTilde(s) {
+  return String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+}
+
+function tipoDe(s, def) {
+  const n = sinTilde(s);
+  const tn = CFG.tipos.map(t => t.nombre);
+  if (!n) return def || '';
+  const exacto = tn.find(t => sinTilde(t) === n);
+  if (exacto) return exacto;
+  const ini = k => tn.find(t => sinTilde(t).indexOf(k) === 0);
+  if (/princip/.test(n)) return ini('princip') || def || '';
+  if (/secund|segund/.test(n)) return ini('secund') || ini('apoyo') || def || '';
+  if (/respons/.test(n)) return ini('respons') || def || '';
+  if (/apoyo|soporte/.test(n)) return ini('apoyo') || def || '';
+  if (/esporad|ocasional|eventual/.test(n)) return ini('esporad') || def || '';
+  return tn.find(t => n.indexOf(sinTilde(t)) >= 0) || def || '';
+}
+
+function tomar(o, claves) {
+  if (!o || typeof o !== 'object') return '';
+  for (const k of claves) {
+    const kk = Object.keys(o).find(x => sinTilde(x).replace(/[\s_-]/g, '') === k);
+    if (kk && o[kk] != null && o[kk] !== '') return o[kk];
+  }
+  return '';
+}
+
+function descDe(tareas) {
+  return tareas.map(t => '• ' + String(t).trim()).filter(t => t.length > 2).join('\n');
+}
+
+function perfilDesdeJSON(o) {
+  if (Array.isArray(o)) o = { funciones: o };
+  const col = tomar(o, ['colaborador', 'perfil', 'persona', 'trabajador', 'empleado']) || o;
+  let cargos = tomar(col, ['cargos', 'cargo', 'cargocontractual', 'cargoscontractuales']);
+  cargos = (Array.isArray(cargos) ? cargos : String(cargos || '').split(/\s*[|;]\s*/)).map(x => limpio(x)).filter(String);
+  let fs = tomar(o, ['funciones', 'functions', 'responsabilidades', 'tareas']);
+  fs = Array.isArray(fs) ? fs.slice() : [];
+  const secs = tomar(o, ['secciones', 'areas', 'grupos']);
+  if (Array.isArray(secs)) secs.forEach(sc => { const l = tomar(sc, ['funciones', 'functions']); if (Array.isArray(l)) l.forEach(f => fs.push(Object.assign({ tipo: tomar(sc, ['tipo', 'type']) || tomar(sc, ['nombre', 'titulo']) }, typeof f === 'string' ? { funcion: f } : f))); });
+  const funciones = fs.map(f => {
+    if (typeof f === 'string') f = { funcion: f };
+    const tareas = tomar(f, ['tareas', 'tasks', 'actividades']);
+    let d = tomar(f, ['descripcion', 'descripcionespecificacion', 'detalle', 'description', 'especificacion']);
+    if (!d && Array.isArray(tareas)) d = descDe(tareas);
+    return { tipo: tipoDe(tomar(f, ['tipo', 'type', 'categoria', 'clase'])), funcion: limpio(tomar(f, ['funcion', 'nombre', 'titulo', 'title', 'name'])), descripcion: limpio(d) };
+  }).filter(f => f.funcion || f.descripcion);
+  return {
+    formato: 'JSON',
+    col: {
+      rut: limpio(tomar(col, ['rut'])), nombre: limpio(tomar(col, ['nombre', 'nombrecompleto', 'name'])), sucursal: limpio(tomar(col, ['sucursal'])),
+      unidad: limpio(tomar(col, ['unidad', 'area', 'areafuncional', 'unidadfuncional'])), cargos: cargos, jefatura: limpio(tomar(col, ['jefatura', 'jefe', 'dependencia', 'reportaa'])),
+      telefono: limpio(tomar(col, ['telefono', 'fono', 'celular'])), correo: limpio(tomar(col, ['correo', 'email', 'mail']))
+    },
+    comentarios: limpio(tomar(o, ['comentarios', 'comentariosgenerales', 'observaciones']) || tomar(col, ['comentarios'])),
+    funciones: funciones,
+    extra: { indicadores: tomar(o, ['indicadores', 'kpi', 'kpis']) || null }
+  };
+}
+
+function filasCSV(t) {
+  const sep = t.split('\n')[0].indexOf('\t') >= 0 ? '\t' : (t.split('\n')[0].split(';').length > t.split('\n')[0].split(',').length ? ';' : ',');
+  const filas = [];
+  let f = [];
+  let c = '';
+  let q = false;
+  for (let i = 0; i < t.length; i++) {
+    const ch = t[i];
+    if (q) {
+      if (ch === '"' && t[i + 1] === '"') { c += '"'; i++; } else if (ch === '"') q = false; else c += ch;
+    } else if (ch === '"' && !c) q = true;
+    else if (ch === sep) { f.push(c); c = ''; }
+    else if (ch === '\n') { f.push(c); filas.push(f); f = []; c = ''; }
+    else if (ch !== '\r') c += ch;
+  }
+  f.push(c);
+  filas.push(f);
+  return filas.filter(r => r.some(x => limpio(x)));
+}
+
+function perfilDesdeCSV(t) {
+  const fl = filasCSV(t);
+  const h = fl[0].map(x => sinTilde(x));
+  const ix = re => h.findIndex(x => re.test(x));
+  const it = ix(/tipo|clase|categ/);
+  const ifn = ix(/^func|nombre|titulo/);
+  const ide = ix(/desc|tarea|detalle|especif/);
+  if (ifn < 0) return null;
+  return { formato: 'Planilla', col: {}, comentarios: '', funciones: fl.slice(1).map(r => ({ tipo: it >= 0 ? tipoDe(r[it]) : '', funcion: limpio(r[ifn]), descripcion: ide >= 0 ? limpio(r[ide]).replace(/\s*\n\s*/g, '\n') : '' })).filter(f => f.funcion) };
+}
+
+function perfilDesdeTexto(t) {
+  let ls = t.replace(/\r/g, '').split('\n').map(x => x.replace(/\s+$/, ''));
+  const cuenta = {};
+  ls.forEach(l => { const k = l.trim(); if (k) cuenta[k] = (cuenta[k] || 0) + 1; });
+  ls = ls.filter(l => { const k = l.trim(); return k && cuenta[k] < 3 && !/\b\d{1,3}\s*\/\s*\d{1,3}$/.test(k); });
+  const secc = /^(\d{2})\s{1,}(\S.{2,})$/;
+  const hayS = ls.some(l => secc.test(l.trim()) && /\bfunci[oó]n(es)?\b/i.test(l));
+  let on = !hayS;
+  let tipo = '';
+  let cur = null;
+  const out = [];
+  const bul = /^[•\-\*·▪◦●○■□➢►✓]\s*(.+)$/;
+  ls.forEach(raw => {
+    let l = raw.trim();
+    let m = l.match(/^#{1,6}\s+(.+)$/);
+    if (m) {
+      const tx = m[1].trim();
+      if (/^#{1,2}\s/.test(l) && /\bfunci[oó]n(es)?\b|responsabilidad/i.test(tx) && !/^\d+[.)]/.test(tx)) { on = true; tipo = tipoDe(tx, ''); cur = null; return; }
+      l = /^\d+[.)]\s/.test(tx) ? tx : '1. ' + tx;
+    }
+    m = l.match(secc);
+    if (m && !/^\d+[.)]/.test(l)) {
+      if (/\bfunci[oó]n(es)?\b/i.test(m[2])) { on = true; tipo = tipoDe(m[2].split(':')[0], '') || tipoDe(m[2], ''); }
+      else on = false;
+      cur = null;
+      return;
+    }
+    if (!on) return;
+    m = l.match(/^(\d{1,2})[.)]\s+(.{3,})$/);
+    if (m) {
+      cur = { tipo: tipo, funcion: m[2].replace(/[:.]\s*$/, '').trim(), tareas: [], texto: [] };
+      out.push(cur);
+      return;
+    }
+    if (!cur) return;
+    if (/^rol desempe/i.test(l)) return;
+    m = l.match(bul);
+    if (m) { cur.tareas.push(m[1].trim()); return; }
+    if (cur.tareas.length) cur.tareas[cur.tareas.length - 1] += ' ' + l;
+    else cur.texto.push(l);
+  });
+  return {
+    formato: 'Texto',
+    col: {},
+    comentarios: '',
+    funciones: out.map(f => ({ tipo: f.tipo, funcion: f.funcion, descripcion: limpio([f.texto.join(' '), descDe(f.tareas.map(x => x.replace(/\s+/g, ' ')))].filter(String).join('\n')) }))
+  };
+}
+
+function leerPerfil(t) {
+  t = String(t || '').replace(/^﻿/, '').trim();
+  if (!t) return null;
+  if (/^[\[{]/.test(t)) {
+    try { return perfilDesdeJSON(JSON.parse(t)); } catch (e) { return { error: 'El JSON no es válido: ' + e.message }; }
+  }
+  const l0 = t.split('\n')[0];
+  if (/[\t;,]/.test(l0) && /func/i.test(l0)) { const c = perfilDesdeCSV(t); if (c && c.funciones.length) return c; }
+  return perfilDesdeTexto(t);
+}
+
+function cargarPdfJs() {
+  if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  if (cargarPdfJs.p) return cargarPdfJs.p;
+  cargarPdfJs.p = new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = PDFJS + 'pdf.min.js';
+    s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; res(window.pdfjsLib); } catch (e) { rej(e); } };
+    s.onerror = () => { cargarPdfJs.p = null; rej(new Error('No se pudo cargar el lector de PDF.')); };
+    document.head.appendChild(s);
+  });
+  return cargarPdfJs.p;
+}
+
+async function textoPdf(file) {
+  const lib = await cargarPdfJs();
+  const doc = await lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+  const out = [];
+  for (let p = 1; p <= doc.numPages; p++) {
+    const pg = await doc.getPage(p);
+    const tc = await pg.getTextContent();
+    const lineas = [];
+    tc.items.forEach(it => {
+      if (!it.str) return;
+      const y = it.transform[5];
+      const x = it.transform[4];
+      let l = lineas.find(z => Math.abs(z.y - y) < 2.5);
+      if (!l) { l = { y: y, it: [] }; lineas.push(l); }
+      l.it.push({ x: x, s: it.str, w: it.width || 0 });
+    });
+    lineas.sort((a, b) => b.y - a.y).forEach(l => {
+      l.it.sort((a, b) => a.x - b.x);
+      let s = '';
+      let fin = null;
+      l.it.forEach(z => { s += (fin !== null && z.x - fin > 1.5 && !/\s$/.test(s) && !/^\s/.test(z.s) ? ' ' : '') + z.s; fin = z.x + z.w; });
+      out.push(s.replace(/\s+/g, ' ').trim());
+    });
+    out.push('');
+  }
+  return out.join('\n');
+}
+
+async function leerArchivoPerfil(file) {
+  if (/\.pdf$/i.test(file.name) || file.type === 'application/pdf') return textoPdf(file);
+  return file.text();
+}
+
+function leerB64(file) {
+  return new Promise(res => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1] || '');
+    r.onerror = () => res(null);
+    r.readAsDataURL(file);
+  });
+}
+
+function bajarB64(nombre, tipo, b64) {
+  const bin = atob(b64);
+  const u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  const url = URL.createObjectURL(new Blob([u], { type: tipo || 'application/octet-stream' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nombre;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+}
+
+function bajarTexto(nombre, texto, tipo) {
+  const url = URL.createObjectURL(new Blob([texto], { type: tipo || 'application/json;charset=utf-8' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nombre;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+}
+
+function adjValido(file) {
+  if (!file) return 'Elija un archivo.';
+  const ext = (file.name.match(/\.([a-z0-9]{2,5})$/i) || [])[1];
+  const lista = CFG.adjExt || ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'jpg', 'jpeg', 'png', 'txt', 'csv', 'json'];
+  if (!ext || lista.indexOf(ext.toLowerCase()) < 0) return 'Tipo de archivo no permitido. Use: ' + lista.join(', ') + '.';
+  if (file.size > (CFG.adjMaxMB || 8) * 1024 * 1024) return 'El archivo supera ' + (CFG.adjMaxMB || 8) + ' MB.';
+  return '';
+}
+
+function adjHTML(lista, borrable) {
+  if (!lista || !lista.length) return '<p class="mini" style="margin:0 0 10px">Sin documentos adjuntos.</p>';
+  return '<ul class="adjl">' + lista.map(a => {
+    const ext = (a.nombre.match(/\.([a-z0-9]{2,5})$/i) || [, 'doc'])[1];
+    const kb = a.kb >= 1024 ? (a.kb / 1024).toFixed(1).replace('.', ',') + ' MB' : a.kb + ' KB';
+    return '<li><span class="ext">' + esc(ext) + '</span><span class="adjn"><b title="' + esc(a.nombre) + '">' + esc(a.nombre) + '</b><small>' + esc(kb + ' · ' + a.fecha + ' · ' + (a.por === 'Titular' ? 'subido por el colaborador' : 'subido por la administración')) + '</small>' + (a.nota ? '<small class="adjnota">' + esc(a.nota) + '</small>' : '') + '</span><span class="adjb"><button type="button" class="btn sec mini2" data-adj-bajar="' + esc(a.adj) + '">Descargar</button>' + (borrable(a) ? '<button type="button" class="quitar" data-adj-borrar="' + esc(a.adj) + '">Eliminar</button>' : '') + '</span></li>';
+  }).join('') + '</ul>';
+}
+
+function credTit() {
+  return EDIT && EDIT.clave ? { id: EDIT.id, clave: EDIT.clave } : null;
+}
+
+function adjTitUI() {
+  const sec = $('secAdjuntos');
+  if (!sec) return;
+  const ej = EDIT && EDIT.id === '66666666';
+  sec.hidden = MANUAL || ej;
+  if (sec.hidden) return;
+  const c = credTit();
+  $('adjTitForm').hidden = !c;
+  $('adjTitAviso').hidden = !!c;
+  if (!c) {
+    $('adjTitLista').innerHTML = '';
+    ADJ_TIT = { id: '', lista: [] };
+    return;
+  }
+  if (ADJ_TIT.id !== c.id) adjTitCargar();
+}
+
+async function adjTitCargar() {
+  const c = credTit();
+  if (!c) return;
+  ADJ_TIT = { id: c.id, lista: [] };
+  $('adjTitLista').innerHTML = '<p class="mini" style="margin:0 0 10px">Cargando documentos…</p>';
+  const j = await api('adjuntos', c);
+  if (!credTit() || credTit().id !== c.id) return;
+  if (!j.ok) { $('adjTitLista').innerHTML = '<p class="errBloque">' + esc(j.mensaje) + '</p>'; return; }
+  ADJ_TIT.lista = j.adjuntos || [];
+  $('adjTitLista').innerHTML = adjHTML(ADJ_TIT.lista, a => a.por === 'Titular');
+}
+
+$('adjTitSubir').addEventListener('click', async () => {
+  const c = credTit();
+  const f = $('adjTitFile').files[0];
+  const err = adjValido(f);
+  if (!c) { toast('Primero guarde su avance.', true); return; }
+  if (err) { toast(err, true); return; }
+  const b = $('adjTitSubir');
+  b.disabled = true;
+  b.textContent = 'Subiendo…';
+  const datos = await leerB64(f);
+  const j = datos ? await api('adjuntoSubir', Object.assign({ nombre: f.name, tipo: f.type, datos: datos, nota: limpio($('adjTitNota').value) }, c), 180000) : { ok: false, mensaje: 'No se pudo leer el archivo.' };
+  b.disabled = false;
+  b.textContent = 'Subir archivo';
+  if (!j.ok) { toast(j.mensaje, true); return; }
+  $('adjTitFile').value = '';
+  $('adjTitNota').value = '';
+  ADJ_TIT.lista = j.adjuntos || [];
+  $('adjTitLista').innerHTML = adjHTML(ADJ_TIT.lista, a => a.por === 'Titular');
+  toast('Documento adjuntado a su perfil.');
+});
+
+$('adjTitLista').addEventListener('click', async ev => {
+  const c = credTit();
+  const bj = ev.target.closest('[data-adj-bajar]');
+  const bo = ev.target.closest('[data-adj-borrar]');
+  if (!c || (!bj && !bo)) return;
+  if (bj) {
+    bj.disabled = true;
+    const j = await api('adjuntoBajar', Object.assign({ adj: bj.dataset.adjBajar }, c), 120000);
+    bj.disabled = false;
+    if (!j.ok) { toast(j.mensaje, true); return; }
+    bajarB64(j.nombre, j.tipo, j.datos);
+    return;
+  }
+  if (!confirm('¿Eliminar este documento de su perfil?')) return;
+  const j = await api('adjuntoBorrar', Object.assign({ adj: bo.dataset.adjBorrar }, c));
+  if (!j.ok) { toast(j.mensaje, true); return; }
+  ADJ_TIT.lista = j.adjuntos || [];
+  $('adjTitLista').innerHTML = adjHTML(ADJ_TIT.lista, a => a.por === 'Titular');
+  toast('Documento eliminado.');
+});
+
+function renderFnAdm() {
+  const box = $('fnAdm');
+  if (!box) return;
+  box.hidden = !FN_ADM.length;
+  box.innerHTML = FN_ADM.length ? '<h3>Funciones agregadas por la administración <small>(' + FN_ADM.length + ')</small></h3><p class="mini" style="margin:2px 0 8px">La administración las incorporó para complementar su perfil. Se conservan al guardar. Si alguna no corresponde, indíquelo en Comentarios generales.</p><ol>' + FN_ADM.map(f => '<li><b>' + esc(f.funcion) + '</b> <span class="chip adm">' + esc(f.tipo) + '</span>' + (f.descripcion ? '<p>' + esc(f.descripcion) + '</p>' : '') + '</li>').join('') + '</ol>' : '';
+}
+
+$('impTit').addEventListener('click', () => $('impTitFile').click());
+
+$('impTitFile').addEventListener('change', async () => {
+  const f = $('impTitFile').files[0];
+  $('impTitFile').value = '';
+  if (!f) return;
+  let t = '';
+  try { t = await leerArchivoPerfil(f); } catch (e) { toast(e.message || 'No se pudo leer el archivo.', true); return; }
+  const r = leerPerfil(t);
+  if (!r || r.error || !r.funciones.length) { toast(r && r.error ? r.error : 'No se encontraron funciones en el archivo. Revise el formato.', true); return; }
+  const libres = maxF() - funciones.filter(x => limpio(x.funcion) || limpio(x.descripcion)).length;
+  dialogo('Importar funciones', '<p class="sub" style="margin:0 0 10px">Se encontraron <b>' + r.funciones.length + '</b> funciones en <b>' + esc(f.name) + '</b>. Marque las que quiere agregar a su registro (puede agregar ' + Math.max(0, libres) + ' más). Después podrá revisarlas y ajustarlas.</p><div class="impsel">' + r.funciones.map((x, i) => '<label><input type="checkbox" data-i="' + i + '"' + (i < libres ? ' checked' : '') + '><span><b>' + esc(x.funcion) + '</b><small>' + esc(x.tipo || 'Sin tipo: elíjalo después') + ' · ' + x.descripcion.length + ' caracteres' + (x.descripcion.length > 1500 ? ' (se recortará a 1500)' : '') + '</small></span></label>').join('') + '</div>', [{ txt: 'Cancelar' }, { txt: 'Agregar funciones', cls: 'pri', fn: () => {
+    const idx = Array.from(document.querySelectorAll('#dlgCuerpo .impsel input:checked')).map(x => Number(x.dataset.i));
+    if (!idx.length) { toast('Marque al menos una función.', true); return; }
+    if (idx.length > libres) { toast('Puede agregar como máximo ' + libres + ' funciones.', true); return; }
+    funciones = funciones.filter(x => limpio(x.funcion) || limpio(x.descripcion));
+    idx.forEach(i => { const x = r.funciones[i]; funciones.push(Object.assign(nueva(x.tipo), { funcion: x.funcion.slice(0, 200), descripcion: x.descripcion.slice(0, 1500) })); });
+    if (!limpio($('comentarios').value) && r.comentarios) $('comentarios').value = r.comentarios.slice(0, 2000);
+    renderFunciones();
+    programarGuardado();
+    cerrarModal('dlg');
+    toast('Se agregaron ' + idx.length + ' funciones. Revise el tipo y la descripción de cada una.');
+    setTimeout(() => $('secFunciones').scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+  } }]);
+  $('dlg').querySelector('.caja').classList.add('grande');
+});
+
+function impNuevo() {
+  return { origen: '', archivo: null, col: { rut: '', nombre: '', sucursal: '', unidad: '', cargos: [], jefatura: '', telefono: '', correo: '' }, comentarios: '', funciones: [], extra: null };
+}
+
+function impCampos() {
+  const c = IMP.col;
+  const uni = unidades();
+  const cargos = CFG.cargos.concat(c.cargos.filter(x => CFG.cargos.indexOf(x) < 0));
+  $('impCol').innerHTML =
+    '<div class="campo c4"><label for="impRut">RUT *</label><input id="impRut" maxlength="14" value="' + esc(c.rut) + '" placeholder="12.345.678-9"></div>' +
+    '<div class="campo c8 impreg"><label for="impNombre">Nombre completo *</label><input id="impNombre" maxlength="120" value="' + esc(c.nombre) + '"></div>' +
+    '<div class="campo c4 impreg"><label for="impSuc">Sucursal *</label><select id="impSuc"><option value="">Seleccione…</option>' + CFG.sucursales.map(x => '<option' + (x === c.sucursal ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div>' +
+    '<div class="campo c4 impreg"><label for="impUni">Área funcional *</label><select id="impUni"><option value="">Seleccione…</option>' + uni.concat(c.unidad && uni.indexOf(c.unidad) < 0 ? [c.unidad] : []).map(x => '<option' + (x === c.unidad ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div>' +
+    '<div class="campo c4 impreg"><label for="impJefe">Jefatura o dependencia *</label><input id="impJefe" maxlength="120" value="' + esc(c.jefatura) + '"></div>' +
+    '<div class="campo c6 impreg"><label for="impTel">Teléfono</label><input id="impTel" maxlength="20" value="' + esc(c.telefono) + '" placeholder="+56 9 1234 5678"></div>' +
+    '<div class="campo c6 impreg"><label for="impMail">Correo</label><input id="impMail" maxlength="120" value="' + esc(c.correo) + '" placeholder="nombre@correo.cl"></div>' +
+    '<div class="campo c12 impreg"><span class="lbl">Cargo contractual *</span><div class="chips" id="impCargos">' + cargos.map(x => '<label class="chipsel"><input type="checkbox" value="' + esc(x) + '"' + (c.cargos.indexOf(x) >= 0 ? ' checked' : '') + '><span>' + esc(x) + '</span></label>').join('') + '</div><input id="impCargoOtro" maxlength="100" placeholder="Otro cargo (opcional)" style="margin-top:8px"></div>' +
+    '<div class="campo c12 impreg"><label for="impCom">Comentarios generales</label><textarea id="impCom" rows="4" maxlength="2000">' + esc(IMP.comentarios) + '</textarea><small class="ayuda">Teléfono o correo: al menos uno es obligatorio para crear el registro.</small></div>';
+  impDestinoUI();
+  impExiste();
+}
+
+function impLeerCol() {
+  if (!$('impRut')) return;
+  const v = id => limpio(($(id) || {}).value);
+  const otro = v('impCargoOtro');
+  IMP.col = { rut: v('impRut'), nombre: v('impNombre'), sucursal: v('impSuc'), unidad: v('impUni'), jefatura: v('impJefe'), telefono: v('impTel'), correo: v('impMail'), cargos: Array.from(document.querySelectorAll('#impCargos input:checked')).map(x => x.value).concat(otro ? [otro] : []) };
+  IMP.comentarios = v('impCom');
+}
+
+function impDest() {
+  const r = document.querySelector('input[name="impDest"]:checked');
+  return r ? r.value : 'registro';
+}
+
+function impDestinoUI() {
+  const comp = impDest() === 'complemento';
+  document.querySelectorAll('#impCol .impreg').forEach(e => { e.hidden = comp; });
+  $('impConfirmar').textContent = comp ? 'Agregar funciones complementarias' : 'Importar registro';
+  impCuenta();
+}
+
+function impPersona() {
+  const r = rutFormato(limpio(($('impRut') || {}).value));
+  const id = rutValido(r) ? regIdDe(r) : '';
+  return id ? LISTA.find(p => p.id === id) || null : null;
+}
+
+async function impExiste() {
+  const p = impPersona();
+  const r = limpio(($('impRut') || {}).value);
+  if (!r) { $('impExiste').textContent = ''; return; }
+  if (!rutValido(r)) { $('impExiste').textContent = 'RUT inválido. Revise el dígito verificador.'; return; }
+  if (!p) { $('impExiste').textContent = impDest() === 'complemento' ? 'Este RUT no tiene un registro enviado: para agregar funciones complementarias primero debe existir su registro.' : 'Este RUT no tiene registro: se creará uno nuevo y se generará su clave.'; return; }
+  $('impExiste').textContent = 'Registro vigente: ' + p.nombre + ' · versión ' + p.version + ' · ' + p.nFunciones + ' funciones. ' + (impDest() === 'complemento' ? 'Las funciones se agregarán como complementarias.' : 'Al importar se creará la versión ' + (p.version + 1) + ' con las funciones marcadas.');
+  if (IMP.prellenado === p.id) return;
+  IMP.prellenado = p.id;
+  const j = await api('detalle', { sesion: SESION, id: p.id });
+  if (!j.ok || !$('impRut')) return;
+  const d = j.registro;
+  impLeerCol();
+  const c = IMP.col;
+  ['nombre', 'sucursal', 'unidad', 'jefatura', 'telefono', 'correo'].forEach(k => { if (!c[k] && d[k]) c[k] = d[k]; });
+  if (!c.cargos.length) c.cargos = d.cargos || [];
+  if (!IMP.comentarios && d.comentarios) IMP.comentarios = d.comentarios;
+  impCampos();
+}
+
+function impFilas() {
+  const tn = CFG.tipos;
+  $('impLista').innerHTML = IMP.funciones.length ? IMP.funciones.map((f, i) => {
+    const largo = f.descripcion.length;
+    return '<article class="impf' + (f.sel ? '' : ' off') + '" data-i="' + i + '"><label class="impchk"><input type="checkbox" data-k="sel"' + (f.sel ? ' checked' : '') + ' aria-label="Incluir función ' + (i + 1) + '"><b>' + (i + 1) + '</b></label><select data-k="tipo" aria-label="Tipo"><option value="">Tipo…</option>' + tn.map(t => '<option' + (t.nombre === f.tipo ? ' selected' : '') + '>' + esc(t.nombre) + '</option>').join('') + '</select><input data-k="funcion" maxlength="200" value="' + esc(f.funcion) + '" aria-label="Función" placeholder="Nombre de la función"><textarea data-k="descripcion" rows="4" aria-label="Descripción">' + esc(f.descripcion) + '</textarea><div class="ft"><small class="cont' + (largo > 1500 ? ' mal' : '') + '">' + largo + '/1500</small><button type="button" class="quitar" data-quitar="' + i + '">Quitar</button></div></article>';
+  }).join('') : '<p class="vacio">No hay funciones. Agregue una fila o lea otro archivo.</p>';
+  impCuenta();
+}
+
+function impCuenta() {
+  if (!IMP) return;
+  const s = IMP.funciones.filter(f => f.sel).length;
+  const max = maxF();
+  $('impCuenta').textContent = '(' + s + ' marcadas de ' + IMP.funciones.length + (s > max ? ' · máximo ' + max : '') + ')';
+  $('impTodas').checked = IMP.funciones.length > 0 && s === IMP.funciones.length;
+}
+
+$('impLista').addEventListener('input', ev => {
+  const a = ev.target.closest('.impf');
+  const k = ev.target.dataset.k;
+  if (!a || !k) return;
+  const f = IMP.funciones[Number(a.dataset.i)];
+  if (k === 'sel') { f.sel = ev.target.checked; a.classList.toggle('off', !f.sel); impCuenta(); return; }
+  f[k] = ev.target.value;
+  if (k === 'descripcion') { const c = a.querySelector('.cont'); c.textContent = f.descripcion.length + '/1500'; c.classList.toggle('mal', f.descripcion.length > 1500); }
+});
+
+$('impLista').addEventListener('click', ev => {
+  const b = ev.target.closest('[data-quitar]');
+  if (!b) return;
+  IMP.funciones.splice(Number(b.dataset.quitar), 1);
+  impFilas();
+});
+
+$('impTodas').addEventListener('change', () => {
+  IMP.funciones.forEach(f => { f.sel = $('impTodas').checked; });
+  impFilas();
+});
+
+$('impTipoMasivo').addEventListener('change', () => {
+  const t = $('impTipoMasivo').value;
+  $('impTipoMasivo').value = '';
+  if (!t) return;
+  IMP.funciones.forEach(f => { if (f.sel) f.tipo = t; });
+  impFilas();
+});
+
+$('impAgregar').addEventListener('click', () => {
+  IMP.funciones.push({ sel: true, tipo: '', funcion: '', descripcion: '' });
+  impFilas();
+  const ul = $('impLista').lastElementChild;
+  if (ul) { ul.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => ul.querySelector('[data-k="funcion"]').focus(), 300); }
+});
+
+document.querySelectorAll('input[name="impDest"]').forEach(r => r.addEventListener('change', () => { impLeerCol(); impDestinoUI(); impExiste(); }));
+
+$('impCol').addEventListener('change', ev => { if (ev.target.id === 'impRut') { impLeerCol(); IMP.prellenado = ''; impExiste(); } });
+
+$('impFile').addEventListener('change', () => {
+  const f = $('impFile').files[0];
+  $('impFileNom').textContent = f ? f.name + ' · ' + Math.ceil(f.size / 1024) + ' KB' : '';
+  if (f) leerImportacion();
+});
+
+$('impLeer').addEventListener('click', leerImportacion);
+
+async function leerImportacion() {
+  const f = $('impFile').files[0];
+  const pegado = $('impTexto').value;
+  $('impRes').textContent = 'Leyendo…';
+  let t = '';
+  let origen = 'texto pegado';
+  if (f && !pegado.trim()) {
+    try { t = await leerArchivoPerfil(f); origen = f.name; } catch (e) { $('impRes').textContent = e.message || 'No se pudo leer el archivo.'; return; }
+  } else t = pegado;
+  const r = leerPerfil(t);
+  if (!r) { $('impRes').textContent = 'Cargue un archivo o pegue el contenido.'; return; }
+  if (r.error) { $('impRes').textContent = r.error; return; }
+  if (!r.funciones.length) { $('impRes').textContent = 'No se encontraron funciones. Revise que cada función esté numerada (1., 2., …) con sus tareas en viñetas, o use la plantilla JSON.'; return; }
+  const rutPrevio = IMP && IMP.col ? IMP.col.rut : '';
+  IMP = impNuevo();
+  IMP.origen = origen;
+  IMP.archivo = f && /\.pdf$/i.test(f.name) && !adjValido(f) ? f : null;
+  Object.keys(IMP.col).forEach(k => { if (r.col && r.col[k] && (k !== 'cargos' || r.col[k].length)) IMP.col[k] = r.col[k]; });
+  if (!IMP.col.rut && rutPrevio) IMP.col.rut = rutPrevio;
+  IMP.comentarios = r.comentarios || '';
+  IMP.extra = r.extra || null;
+  IMP.funciones = r.funciones.map(x => ({ sel: true, tipo: x.tipo, funcion: x.funcion, descripcion: x.descripcion }));
+  const sinTipo = IMP.funciones.filter(x => !x.tipo).length;
+  const largas = IMP.funciones.filter(x => x.descripcion.length > 1500).length;
+  $('impRes').textContent = r.funciones.length + ' funciones leídas desde ' + origen + ' (' + r.formato + ')' + (sinTipo ? ' · ' + sinTipo + ' sin tipo' : '') + (largas ? ' · ' + largas + ' con descripción sobre 1500 caracteres' : '') + '.';
+  $('impPaso2').hidden = false;
+  $('impRespNom').textContent = IMP.archivo ? 'Se adjuntará ' + IMP.archivo.name + ' como respaldo. Puede elegir otro archivo.' : '';
+  impCampos();
+  impFilas();
+  $('impErr').textContent = '';
+  setTimeout(() => $('impPaso2').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function impJSON() {
+  impLeerCol();
+  return { formato: 'lf-perfil', version: 1, fuente: { documento: IMP.origen || '', exportado: hoy() }, colaborador: IMP.col, comentarios: IMP.comentarios, funciones: IMP.funciones.filter(f => f.sel).map(f => ({ tipo: f.tipo, funcion: limpio(f.funcion), descripcion: limpio(f.descripcion) })), indicadores: IMP.extra && IMP.extra.indicadores ? IMP.extra.indicadores : undefined };
+}
+
+$('impExportar').addEventListener('click', () => {
+  const o = impJSON();
+  bajarTexto('perfil ' + (o.colaborador.nombre || 'colaborador') + '.json', JSON.stringify(o, null, 2));
+});
+
+$('impPlantilla').addEventListener('click', () => {
+  const pr = tipoPrincipal();
+  const otro = (CFG.tipos.find(t => t.nombre !== pr) || { nombre: pr }).nombre;
+  const o = { formato: 'lf-perfil', version: 1, colaborador: { rut: '12.345.678-9', nombre: 'Nombre Apellido Apellido', sucursal: CFG.sucursales[0] || '', unidad: unidades()[0] || '', cargos: [CFG.cargos[0] || 'Cargo contractual'], jefatura: 'Nombre o cargo de la jefatura', telefono: '+56 9 1234 5678', correo: 'nombre@correo.cl' }, comentarios: 'Observaciones generales del colaborador.', funciones: [{ tipo: pr, funcion: 'Gestionar la cobranza a clientes', tareas: ['Llamar a clientes con facturas vencidas.', 'Registrar compromisos de pago en el sistema.'] }, { tipo: otro, funcion: 'Apoyar el cierre de caja', descripcion: 'Cuadrar la caja al cierre y reportar diferencias a la jefatura.' }] };
+  bajarTexto('plantilla perfil levantamiento.json', JSON.stringify(o, null, 2));
+});
+
+$('impRespaldo').addEventListener('change', () => {
+  const f = $('impRespaldo').files[0];
+  const e = f ? adjValido(f) : '';
+  if (e) { toast(e, true); $('impRespaldo').value = ''; return; }
+  if (f) { IMP.archivo = f; $('impRespNom').textContent = 'Se adjuntará ' + f.name + ' como respaldo.'; }
+});
+
+function impValidar() {
+  impLeerCol();
+  const e = [];
+  const c = IMP.col;
+  const comp = impDest() === 'complemento';
+  const fs = IMP.funciones.filter(f => f.sel);
+  const rut = rutFormato(c.rut);
+  if (!rutValido(c.rut)) e.push('RUT inválido.');
+  if (comp && rutValido(c.rut) && !impPersona()) e.push('Este RUT no tiene un registro enviado. Importe primero el registro del colaborador.');
+  if (!comp) {
+    if (c.nombre.length < 5) e.push('Indique el nombre completo.');
+    if (!c.sucursal) e.push('Elija la sucursal.');
+    if (!c.unidad) e.push('Elija el área funcional.');
+    if (c.jefatura.length < 2) e.push('Indique la jefatura o dependencia.');
+    if (!c.cargos.length) e.push('Marque al menos un cargo contractual.');
+    if (!c.telefono && !c.correo) e.push('Indique teléfono o correo.');
+    if (c.correo && !RE_MAIL.test(c.correo)) e.push('Correo inválido.');
+    if (fs.length && !fs.some(f => f.tipo === tipoPrincipal())) e.push('Al menos una función debe ser de tipo ' + tipoPrincipal() + '.');
+  }
+  if (!fs.length) e.push('Marque al menos una función.');
+  if (fs.length > maxF()) e.push('Máximo ' + maxF() + ' funciones por importación; desmarque ' + (fs.length - maxF()) + '.');
+  fs.forEach(f => {
+    const n = 'Función ' + (IMP.funciones.indexOf(f) + 1) + ': ';
+    if (!f.tipo) e.push(n + 'elija el tipo.');
+    if (limpio(f.funcion).length < 3) e.push(n + 'falta el nombre.');
+    if (limpio(f.descripcion).length < 5) e.push(n + 'falta la descripción.');
+    if (limpio(f.descripcion).length > 1500) e.push(n + 'la descripción supera 1500 caracteres.');
+  });
+  return { errores: e, comp: comp, fs: fs, rut: rut };
+}
+
+$('impConfirmar').addEventListener('click', async () => {
+  const v = impValidar();
+  $('impErr').textContent = v.errores.slice(0, 8).join(' ') + (v.errores.length > 8 ? ' (y ' + (v.errores.length - 8) + ' observaciones más)' : '');
+  if (v.errores.length) { $('impErr').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  const c = IMP.col;
+  const fs = v.fs.map(f => ({ tipo: f.tipo, funcion: limpio(f.funcion), descripcion: limpio(f.descripcion) }));
+  const b = $('impConfirmar');
+  b.disabled = true;
+  const txt = b.textContent;
+  b.textContent = 'Importando…';
+  const j = v.comp
+    ? await api('complementar', { sesion: SESION, rut: v.rut, funciones: fs }, 90000)
+    : await api('guardar', { modo: 'manual', importado: true, sesion: SESION, transcritoPor: 'Importación de perfil', folio: '', nombre: c.nombre, rut: v.rut, sucursal: c.sucursal, unidad: c.unidad, cargos: c.cargos, jefatura: c.jefatura, telefono: c.telefono ? telNormal(c.telefono) : '', correo: c.correo.toLowerCase(), comentarios: IMP.comentarios, consentimiento: true, funciones: fs }, 90000);
+  if (!j.ok) { b.disabled = false; b.textContent = txt; if (j.sesion !== false) $('impErr').textContent = j.mensaje; return; }
+  const id = j.id || regIdDe(v.rut);
+  let adj = '';
+  if (IMP.archivo) {
+    b.textContent = 'Adjuntando respaldo…';
+    const datos = await leerB64(IMP.archivo);
+    const ja = datos ? await api('adjuntoSubirAdmin', { sesion: SESION, id: id, nombre: IMP.archivo.name, tipo: IMP.archivo.type, datos: datos, nota: 'Documento de respaldo importado' }, 180000) : { ok: false, mensaje: 'No se pudo leer el archivo.' };
+    adj = ja.ok ? '<p class="mini">Documento de respaldo adjuntado: ' + esc(IMP.archivo.name) + '.</p>' : '<p class="errBloque">El registro se importó, pero el respaldo no se pudo adjuntar: ' + esc(ja.mensaje) + '</p>';
+  }
+  b.disabled = false;
+  b.textContent = txt;
+  const nombre = c.nombre || j.nombre || '';
+  const cred = j.clave ? '<div class="cred" style="margin:12px 0"><div class="credbox"><span>ID de registro</span><b id="imId">' + esc(id) + '</b><button type="button" class="copiar" data-copia="imId">Copiar</button></div><div class="credbox"><span>Clave</span><b id="imClave">' + esc(j.clave) + '</b><button type="button" class="copiar" data-copia="imClave">Copiar</button></div></div><p class="mini">Entregue el ID y la clave al colaborador para que revise y complete su registro. La clave no se vuelve a mostrar.</p>' : '';
+  const msg = v.comp ? 'Se agregaron <b>' + j.agregadas + '</b> funciones complementarias al registro de <b>' + esc(nombre) + '</b>.' : 'Registro de <b>' + esc(nombre) + '</b> importado con <b>' + fs.length + '</b> funciones' + (j.version > 1 ? ' como versión ' + j.version : '') + '.';
+  IMP = null;
+  $('impPaso2').hidden = true;
+  $('impTexto').value = '';
+  $('impFile').value = '';
+  $('impRespaldo').value = '';
+  $('impFileNom').textContent = '';
+  $('impRes').textContent = '';
+  cargarLista();
+  dialogo('Importación completada', '<p>' + msg + '</p>' + cred + adj, [{ txt: 'Importar otro' }, { txt: 'Abrir registro', cls: 'pri', fn: () => { cerrarModal('dlg'); irSub('reg'); abrirDetalle(id); } }]);
+});
+
+function irImportar(rut, destino) {
+  $('dDetalle').hidden = true;
+  $('dPanel').hidden = false;
+  irSub('imp');
+  const r = document.querySelector('input[name="impDest"][value="' + (destino || 'registro') + '"]');
+  if (r) r.checked = true;
+  if (!IMP) IMP = impNuevo();
+  IMP.col.rut = rut || IMP.col.rut;
+  if ($('impPaso2').hidden) {
+    $('impRes').textContent = 'Cargue el archivo con las funciones de ' + (rut || 'el colaborador') + ' y presione "Leer contenido".';
+  } else {
+    impCampos();
+  }
+  window.scrollTo(0, 0);
+}
+
+function renderAdjDet() {
+  const l = (DET && DET.adjuntos) || [];
+  $('detAdjN').textContent = l.length ? '(' + l.length + ')' : '';
+  $('detAdj').innerHTML = adjHTML(l, () => true);
+}
+
+$('detAdjSubir').addEventListener('click', async () => {
+  const f = $('detAdjFile').files[0];
+  const err = adjValido(f);
+  if (err) { toast(err, true); return; }
+  const b = $('detAdjSubir');
+  b.disabled = true;
+  b.textContent = 'Subiendo…';
+  const datos = await leerB64(f);
+  const j = datos ? await api('adjuntoSubirAdmin', { sesion: SESION, id: DET.id, nombre: f.name, tipo: f.type, datos: datos, nota: limpio($('detAdjNota').value) }, 180000) : { ok: false, mensaje: 'No se pudo leer el archivo.' };
+  b.disabled = false;
+  b.textContent = 'Adjuntar archivo';
+  if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+  $('detAdjFile').value = '';
+  $('detAdjNota').value = '';
+  DET.adjuntos = j.adjuntos || [];
+  renderAdjDet();
+  toast('Documento adjuntado.');
+});
+
+$('detAdj').addEventListener('click', async ev => {
+  const bj = ev.target.closest('[data-adj-bajar]');
+  const bo = ev.target.closest('[data-adj-borrar]');
+  if (!DET || (!bj && !bo)) return;
+  if (bj) {
+    bj.disabled = true;
+    const j = await api('adjuntoBajarAdmin', { sesion: SESION, id: DET.id, adj: bj.dataset.adjBajar }, 120000);
+    bj.disabled = false;
+    if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+    bajarB64(j.nombre, j.tipo, j.datos);
+    return;
+  }
+  if (!confirm('¿Eliminar este documento del registro? El archivo se envía a la papelera de Drive.')) return;
+  const j = await api('adjuntoBorrarAdmin', { sesion: SESION, id: DET.id, adj: bo.dataset.adjBorrar });
+  if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+  DET.adjuntos = j.adjuntos || [];
+  renderAdjDet();
+  toast('Documento eliminado.');
+});
+
+$('detCompl').addEventListener('click', () => {
+  if (sucio && !confirm('Tiene precisiones sin guardar. Si continúa, se perderán al recargar el registro. ¿Continuar?')) return;
+  dialogo('Agregar función complementaria', '<p class="sub" style="margin:0 0 12px">Se agrega al registro de <b>' + esc(DET.nombre) + '</b> marcada como "agregada por administración". No modifica lo declarado por el colaborador y se conserva cuando él actualiza su registro.</p><div class="campo"><label for="cmTipo">Tipo de función *</label><select id="cmTipo">' + opciones(CFG.tipos, '') + '</select></div><div class="campo"><label for="cmFun">Función *</label><input id="cmFun" maxlength="200" placeholder="Ej.: Supervisar el cuadre de caja diario"></div><div class="campo"><label for="cmDesc">Descripción / Especificación *</label><textarea id="cmDesc" maxlength="1500" rows="4" placeholder="Tareas con que se cumple la función"></textarea></div><p id="cmErr" class="errBloque"></p>', [{ txt: 'Cancelar' }, { txt: 'Agregar función', cls: 'pri', fn: async b => {
+    const f = { tipo: $('cmTipo').value, funcion: limpio($('cmFun').value), descripcion: limpio($('cmDesc').value) };
+    if (!f.tipo || f.funcion.length < 3 || f.descripcion.length < 5) { $('cmErr').textContent = 'Complete el tipo, la función (3 caracteres o más) y la descripción (5 caracteres o más).'; return; }
+    b.disabled = true;
+    const j = await api('complementar', { sesion: SESION, id: DET.id, funciones: [f] });
+    b.disabled = false;
+    if (!j.ok) { if (j.sesion !== false) $('cmErr').textContent = j.mensaje; return; }
+    cerrarModal('dlg');
+    sucio = false;
+    await abrirDetalle(DET.id);
+    toast('Función complementaria agregada.');
+  } }]);
+  setTimeout(() => $('cmTipo').focus(), 50);
+});
+
+$('detImp').addEventListener('click', () => {
+  if (sucio && !confirm('Tiene cambios sin guardar en la revisión. ¿Ir a importar de todos modos?')) return;
+  sucio = false;
+  irImportar(DET.rut, 'complemento');
+});
+
+$('detFunciones').addEventListener('click', async ev => {
+  const b = ev.target.closest('[data-quitar-compl]');
+  if (!b || !DET) return;
+  if (!confirm('¿Quitar esta función complementaria del registro?')) return;
+  if (sucio && !confirm('Tiene precisiones sin guardar que se perderán al recargar. ¿Continuar?')) return;
+  const j = await api('complementoQuitar', { sesion: SESION, id: DET.id, n: Number(b.dataset.quitarCompl) });
+  if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+  sucio = false;
+  await abrirDetalle(DET.id);
+  toast('Función complementaria quitada.');
+});
+
 
 (function conectar() {
   const m = location.hash.match(/[#&]api=([^&]+)/);
