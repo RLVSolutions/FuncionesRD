@@ -5548,7 +5548,8 @@ function impCampos() {
   const uni = unidades();
   const cargos = CFG.cargos.concat(c.cargos.filter(x => CFG.cargos.indexOf(x) < 0));
   $('impCol').innerHTML =
-    '<div class="campo c4"><label for="impRut">RUT *</label><input id="impRut" maxlength="14" value="' + esc(c.rut) + '" placeholder="12.345.678-9"></div>' +
+    '<div class="campo c8"><label for="impSel" id="impSelLbl">Colaborador</label><select id="impSel"><option value="">Elegir de la lista…</option>' + LISTA.slice().sort((a, b) => a.nombre.localeCompare(b.nombre)).map(p => '<option value="' + esc(p.rut) + '"' + (rutValido(c.rut) && regIdDe(rutFormato(c.rut)) === p.id ? ' selected' : '') + '>' + esc(p.nombre + ' · ' + p.sucursal + ' · ' + p.rut) + '</option>').join('') + '</select></div>' +
+    '<div class="campo c4" id="impRutCampo"><label for="impRut">RUT *</label><input id="impRut" maxlength="14" value="' + esc(c.rut) + '" placeholder="12.345.678-9"></div>' +
     '<div class="campo c8 impreg"><label for="impNombre">Nombre completo *</label><input id="impNombre" maxlength="120" value="' + esc(c.nombre) + '"></div>' +
     '<div class="campo c4 impreg"><label for="impSuc">Sucursal *</label><select id="impSuc"><option value="">Seleccione…</option>' + CFG.sucursales.map(x => '<option' + (x === c.sucursal ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div>' +
     '<div class="campo c4 impreg"><label for="impUni">Área funcional *</label><select id="impUni"><option value="">Seleccione…</option>' + uni.concat(c.unidad && uni.indexOf(c.unidad) < 0 ? [c.unidad] : []).map(x => '<option' + (x === c.unidad ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select></div>' +
@@ -5577,6 +5578,7 @@ function impDest() {
 function impDestinoUI() {
   const comp = impDest() === 'complemento';
   document.querySelectorAll('#impCol .impreg').forEach(e => { e.hidden = comp; });
+  if ($('impRutCampo')) { $('impRutCampo').hidden = comp; $('impSelLbl').textContent = comp ? 'Colaborador al que se agregan las funciones *' : 'Colaborador existente (opcional; si es nuevo, escriba su RUT)'; }
   $('impConfirmar').textContent = comp ? 'Agregar funciones complementarias' : 'Importar registro';
   impCuenta();
 }
@@ -5663,7 +5665,10 @@ $('impAgregar').addEventListener('click', () => {
 
 document.querySelectorAll('input[name="impDest"]').forEach(r => r.addEventListener('change', () => { impLeerCol(); impDestinoUI(); impExiste(); }));
 
-$('impCol').addEventListener('change', ev => { if (ev.target.id === 'impRut') { impLeerCol(); IMP.prellenado = ''; impExiste(); } });
+$('impCol').addEventListener('change', ev => {
+  if (ev.target.id === 'impSel') { $('impRut').value = ev.target.value; impLeerCol(); IMP.prellenado = ''; impExiste(); return; }
+  if (ev.target.id === 'impRut') { impLeerCol(); IMP.prellenado = ''; impExiste(); }
+});
 
 $('impFile').addEventListener('change', () => {
   const f = $('impFile').files[0];
@@ -5737,7 +5742,7 @@ function impValidar() {
   const comp = impDest() === 'complemento';
   const fs = IMP.funciones.filter(f => f.sel);
   const rut = rutFormato(c.rut);
-  if (!rutValido(c.rut)) e.push('RUT inválido.');
+  if (!rutValido(c.rut)) e.push(comp ? 'Elija el colaborador de la lista.' : 'Elija un colaborador de la lista o escriba un RUT válido.');
   if (comp && rutValido(c.rut) && !impPersona()) e.push('Este RUT no tiene un registro enviado. Importe primero el registro del colaborador.');
   if (!comp) {
     if (c.nombre.length < 5) e.push('Indique el nombre completo.');
@@ -5787,7 +5792,8 @@ $('impConfirmar').addEventListener('click', async () => {
   b.textContent = txt;
   const nombre = c.nombre || j.nombre || '';
   const cred = j.clave ? '<div class="cred" style="margin:12px 0"><div class="credbox"><span>ID de registro</span><b id="imId">' + esc(id) + '</b><button type="button" class="copiar" data-copia="imId">Copiar</button></div><div class="credbox"><span>Clave</span><b id="imClave">' + esc(j.clave) + '</b><button type="button" class="copiar" data-copia="imClave">Copiar</button></div></div><p class="mini">Entregue el ID y la clave al colaborador para que revise y complete su registro. La clave no se vuelve a mostrar.</p>' : '';
-  const msg = v.comp ? 'Se agregaron <b>' + j.agregadas + '</b> funciones complementarias al registro de <b>' + esc(nombre) + '</b>.' : 'Registro de <b>' + esc(nombre) + '</b> importado con <b>' + fs.length + '</b> funciones' + (j.version > 1 ? ' como versión ' + j.version : '') + '.';
+  const omit = (j.omitidas || []).length;
+  const msg = v.comp ? 'Se agregaron <b>' + j.agregadas + '</b> funciones complementarias al registro de <b>' + esc(nombre) + '</b>.' + (omit ? ' ' + omit + (omit === 1 ? ' se omitió porque ya estaba' : ' se omitieron porque ya estaban') + ' en su perfil.' : '') : 'Registro de <b>' + esc(nombre) + '</b> importado con <b>' + fs.length + '</b> funciones' + (j.version > 1 ? ' como versión ' + j.version : '') + '.';
   IMP = null;
   $('impPaso2').hidden = true;
   $('impTexto').value = '';
