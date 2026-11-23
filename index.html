@@ -749,7 +749,7 @@ body>*:not(#print){display:none!important}
 .fnadm ol{margin:0;padding-left:20px}
 .fnadm li{margin:0 0 8px}
 .fnadm li p{margin:3px 0 0;white-space:pre-line;color:var(--muted);font-size:.85rem}
-.chip.adm{background:#fff4d6;color:var(--warn)}
+.chip.adm{background:var(--warn-soft);color:var(--warn)}
 .chip.imp{background:#e8eef5;color:#1f3a5f}
 .rev.radm .decl{border-left-color:var(--mark)}
 .chipsI .quitar{padding:1px 9px;font-size:.72rem}
@@ -795,6 +795,51 @@ body>*:not(#print){display:none!important}
 .impsel small{display:block;color:var(--muted);font-size:.78rem}
 .pdoc .padm{display:inline-block;margin-left:6px;font-size:7.5pt;font-weight:400;color:#7a5200;border:.5pt solid #e0c070;border-radius:3pt;padding:0 3pt}
 @media (max-width:760px){.imprad{grid-template-columns:1fr}.impf{grid-template-columns:1fr}.impf textarea,.impf .ft{grid-column:auto}.adjl li{flex-wrap:wrap}}
+.catgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.catder{position:sticky;top:110px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 130px)}
+.catder h3{margin:0;font-size:1rem}
+.catdest{overflow:auto;min-height:120px;max-height:46vh;display:grid;gap:6px;align-content:start}
+.catd{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:7px 9px;cursor:pointer;background:var(--card)}
+.catd.on{border-color:var(--acc);background:var(--acc-soft)}
+.catd input{margin-top:3px;accent-color:var(--acc);width:18px;height:18px;flex:0 0 18px;padding:0;min-height:0}
+.catd b{display:block;font-size:.88rem}
+.catd small{display:block;color:var(--muted);font-size:.74rem}
+.catdacc,.catacc{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.catacc{justify-content:space-between;margin:0 0 10px}
+.catacc .mini{margin:0;flex:1}
+.catres{font-size:.86rem;color:var(--muted)}
+.catres b{color:var(--txt)}
+.catfil{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:8px;margin:0 0 8px}
+.catfil .chk{grid-column:1/-1;display:flex;gap:6px;align-items:center;font-size:.86rem}
+.catgr{margin:0 0 14px}
+.catgrupo{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 2px;border-bottom:2px solid var(--acc);margin-bottom:8px}
+.catgrupo .chk{display:flex;gap:8px;align-items:center;font-size:.95rem}
+.catgrupo input,.catchk input{width:18px;height:18px;accent-color:var(--acc)}
+.catgrupo small{color:var(--muted);font-size:.78rem}
+.catbar{flex:0 0 110px;height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin-left:auto}
+.catbar i{display:block;height:100%;background:var(--ok)}
+.catf{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:6px 10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 8px;background:var(--card)}
+.catf.sel{border-color:var(--acc);box-shadow:inset 3px 0 0 var(--acc)}
+.catf.ya{background:var(--line2)}
+.catchk{padding-top:2px}
+.catt{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.catt b{font-size:.95rem}
+.catmeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.catmeta select{width:auto;padding:3px 26px 3px 8px;font-size:.78rem;min-height:0;height:auto}
+.catp{font-size:.7rem;border:1px solid var(--line);border-radius:999px;padding:1px 8px;color:var(--muted);white-space:nowrap}
+.catfu{display:block;color:var(--muted);font-size:.74rem;margin-top:4px;font-style:italic}
+.catf details{margin-top:6px}
+.catf summary{cursor:pointer;font-size:.8rem;color:var(--acc);font-weight:600}
+.catf details p{margin:6px 0 0;white-space:pre-line;font-size:.84rem;color:var(--txt)}
+.catbtn{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.catq{font-size:.72rem;color:var(--muted)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.catrt td small{display:block;color:var(--muted);font-size:.74rem}
+.catrt tbody tr{cursor:default}
+.catrt th{white-space:normal}
+.catrt .mal{color:var(--err)}
+@media (max-width:980px){.catgrid{grid-template-columns:1fr}.catder{position:static;max-height:none}.catdest{max-height:40vh}.catfil{grid-template-columns:1fr}}
+@media (max-width:600px){.catf{grid-template-columns:24px minmax(0,1fr)}.catbtn{grid-column:2;flex-direction:row;justify-content:space-between;align-items:center}.catbar{flex-basis:100%;margin-left:0}}
 </style>
 </head>
 <body>
@@ -974,7 +1019,7 @@ body>*:not(#print){display:none!important}
 <div class="dhead">
 <div><h1>Datos</h1><p class="sub" id="dSub"></p></div>
 </div>
-<nav class="pnav" id="dTabs" aria-label="Secciones de Datos"><div class="pnav-tabs" role="tablist"><button type="button" role="tab" data-sub="reg" aria-selected="true">Registros</button><button type="button" role="tab" data-sub="imp" aria-selected="false">Importar perfil</button><button type="button" role="tab" data-sub="desc" aria-selected="false">Descriptores</button><button type="button" role="tab" data-sub="faq" aria-selected="false">Entrenar asistente</button><button type="button" role="tab" data-sub="cfg" aria-selected="false">Configuración</button></div><div class="pnav-acc"><button type="button" id="dManual">Transcribir formulario en papel</button><button type="button" id="dRefrescar">Actualizar</button><button type="button" id="dCodigo">Cambiar código</button><button type="button" id="dSalir" class="salir">Cerrar sesión</button></div></nav>
+<nav class="pnav" id="dTabs" aria-label="Secciones de Datos"><div class="pnav-tabs" role="tablist"><button type="button" role="tab" data-sub="reg" aria-selected="true">Registros</button><button type="button" role="tab" data-sub="imp" aria-selected="false">Importar perfil</button><button type="button" role="tab" data-sub="cat" aria-selected="false">Catálogo</button><button type="button" role="tab" data-sub="desc" aria-selected="false">Descriptores</button><button type="button" role="tab" data-sub="faq" aria-selected="false">Entrenar asistente</button><button type="button" role="tab" data-sub="cfg" aria-selected="false">Configuración</button></div><div class="pnav-acc"><button type="button" id="dManual">Transcribir formulario en papel</button><button type="button" id="dRefrescar">Actualizar</button><button type="button" id="dCodigo">Cambiar código</button><button type="button" id="dSalir" class="salir">Cerrar sesión</button></div></nav>
 <div id="subReg">
 <section class="tarjeta">
 <div class="filtros"><input id="fTexto" type="search" placeholder="Buscar por nombre, RUT, ID o cargo" aria-label="Buscar"><select id="fSuc" aria-label="Filtrar por sucursal"></select><select id="fEstado" aria-label="Filtrar por estado"></select><span class="cuenta" id="fCuenta"></span></div>
@@ -1005,6 +1050,27 @@ body>*:not(#print){display:none!important}
 <p id="impErr" class="errBloque" role="alert"></p>
 <div class="impacc"><button type="button" id="impExportar" class="btn sec">Descargar JSON adaptado</button><button type="button" id="impConfirmar" class="btn pri">Importar registro</button></div>
 </section>
+</div>
+</section>
+<section id="subCat" hidden>
+<section class="tarjeta">
+<div class="imphead" style="margin:0"><div><h2 style="margin:0">Catálogo de funciones complementarias</h2><p class="sub" style="margin:4px 0 0">Marque funciones y elija a qué colaboradores agregarlas, o use "Agregar" en una función para hacerlo de a una. Filtre por perfil para marcar de una vez todo lo que corresponde a un cargo.</p></div><div class="impbar"><label class="btn sec" for="catFile">Importar catálogo</label><input type="file" id="catFile" accept=".json" hidden><button type="button" id="catBajar" class="btn txt">Descargar JSON</button></div></div>
+</section>
+<div class="catgrid">
+<section class="tarjeta">
+<div class="catfil"><input id="catBuscar" type="search" placeholder="Buscar función o tarea…" aria-label="Buscar en el catálogo"><select id="catPerfil" aria-label="Perfil"></select><select id="catArea" aria-label="Área"></select><label class="chk"><input type="checkbox" id="catSinYa"> Ocultar las que ya están en el perfil (con un colaborador elegido)</label></div>
+<div class="catacc"><span id="catCuenta" class="mini"></span><button type="button" id="catMarcarVis" class="btn txt">Marcar visibles</button><button type="button" id="catLimpiar" class="btn txt">Desmarcar</button></div>
+<div id="catLista"></div>
+</section>
+<aside class="tarjeta catder" aria-label="Colaboradores de destino">
+<h3>Agregar a</h3>
+<input id="catDestBuscar" type="search" placeholder="Buscar colaborador, sucursal o cargo" aria-label="Buscar colaborador">
+<div class="catdacc"><button type="button" id="catDestTodos" class="btn txt">Marcar visibles</button><button type="button" id="catDestNinguno" class="btn txt">Ninguno</button></div>
+<div id="catDest" class="catdest"></div>
+<div id="catResumen" class="catres"></div>
+<label class="chk" style="display:flex;gap:6px;align-items:center;font-size:.82rem"><input type="checkbox" id="catDup"> Agregar aunque ya existan en el perfil</label>
+<button type="button" id="catAgregar" class="btn pri ancho" disabled>Agregar al perfil</button>
+</aside>
 </div>
 </section>
 <section id="subCfg" hidden><div class="cfggrid">
@@ -1080,7 +1146,7 @@ body>*:not(#print){display:none!important}
 </section>
 </div>
 <section class="tarjeta" style="margin-bottom:16px">
-<div class="imphead"><h2 style="margin:0">Funciones declaradas y precisiones</h2><div class="impbar"><button type="button" id="detImp" class="btn txt">Importar funciones</button><button type="button" id="detCompl" class="btn sec">+ Función complementaria</button></div></div>
+<div class="imphead"><h2 style="margin:0">Funciones declaradas y precisiones</h2><div class="impbar"><button type="button" id="detImp" class="btn txt">Importar funciones</button><button type="button" id="detCat" class="btn txt">Desde catálogo</button><button type="button" id="detCompl" class="btn sec">+ Función complementaria</button></div></div>
 <div class="leyRev"><span><i class="d"></i>Declarado por el trabajador</span><span><i class="p"></i>Precisión de revisión</span></div>
 <div id="detFunciones"></div>
 </section>
@@ -3322,6 +3388,8 @@ function irSub(sub) {
   $('subCfg').hidden = sub !== 'cfg';
   $('subDesc').hidden = sub !== 'desc';
   $('subImp').hidden = sub !== 'imp';
+  $('subCat').hidden = sub !== 'cat';
+  if (sub === 'cat') abrirCatalogo();
   if (sub === 'imp') { $('impTipoMasivo').innerHTML = '<option value="">Cambiar tipo de las marcadas…</option>' + CFG.tipos.map(t => '<option>' + esc(t.nombre) + '</option>').join(''); if (!LISTA.length) cargarLista(); }
   if (sub === 'desc') abrirDescriptores();
   if (sub === 'cfg') irCfg();
@@ -5825,6 +5893,260 @@ $('detFunciones').addEventListener('click', async ev => {
   sucio = false;
   await abrirDetalle(DET.id);
   toast('Función complementaria quitada.');
+});
+
+
+const CAT = { lista: null, sel: new Set(), tipo: {}, dest: new Set(), ya: {}, cargando: false };
+
+function catNorm(s) {
+  return String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+async function abrirCatalogo() {
+  if (!LISTA.length) await cargarLista();
+  if (!CAT.lista && !CAT.cargando) {
+    CAT.cargando = true;
+    $('catLista').innerHTML = '<p class="vacio">Cargando catálogo…</p>';
+    const j = await api('catalogo', { sesion: SESION });
+    CAT.cargando = false;
+    if (!j.ok) { if (j.sesion !== false) $('catLista').innerHTML = '<p class="errBloque">' + esc(j.mensaje) + '</p>'; return; }
+    CAT.lista = j.funciones || [];
+  }
+  catFiltros();
+  catDestinos();
+  await catCargarYa();
+  catRender();
+}
+
+function catFiltros() {
+  const l = CAT.lista || [];
+  const perf = Array.from(new Set([].concat.apply([], l.map(f => f.perfiles))));
+  const areas = Array.from(new Set(l.map(f => f.area)));
+  const vp = $('catPerfil').value;
+  const va = $('catArea').value;
+  $('catPerfil').innerHTML = '<option value="">Todos los perfiles</option>' + perf.map(p => '<option' + (p === vp ? ' selected' : '') + '>' + esc(p) + '</option>').join('');
+  $('catArea').innerHTML = '<option value="">Todas las áreas</option>' + areas.map(a => '<option' + (a === va ? ' selected' : '') + '>' + esc(a) + '</option>').join('');
+}
+
+function catVisibles() {
+  const q = sinTilde($('catBuscar').value);
+  const pf = $('catPerfil').value;
+  const ar = $('catArea').value;
+  const ya = catYaUnico();
+  return (CAT.lista || []).filter(f => (!pf || f.perfiles.indexOf(pf) >= 0) && (!ar || f.area === ar) && (!q || sinTilde(f.funcion + ' ' + f.descripcion + ' ' + f.area).indexOf(q) >= 0) && !($('catSinYa').checked && ya && ya.has(catNorm(f.funcion))));
+}
+
+function catYaUnico() {
+  if (CAT.dest.size !== 1) return null;
+  return CAT.ya[Array.from(CAT.dest)[0]] || null;
+}
+
+async function catCargarYa() {
+  if (CAT.dest.size !== 1) return;
+  const id = Array.from(CAT.dest)[0];
+  if (CAT.ya[id]) return;
+  const j = await api('detalle', { sesion: SESION, id: id });
+  if (!j.ok) return;
+  CAT.ya[id] = new Set((j.registro.funciones || []).map(f => catNorm(f.funcion)));
+}
+
+function catRender() {
+  if (!CAT.lista) return;
+  if (!CAT.lista.length) {
+    $('catLista').innerHTML = '<div class="vacio"><p>El catálogo está vacío.</p><p class="mini">Importe un archivo JSON de catálogo con el botón "Importar catálogo".</p></div>';
+    catResumen();
+    return;
+  }
+  const vis = catVisibles();
+  const ya = catYaUnico();
+  const tn = CFG.tipos.map(t => t.nombre);
+  const grupos = {};
+  vis.forEach(f => { (grupos[f.area] = grupos[f.area] || []).push(f); });
+  $('catLista').innerHTML = Object.keys(grupos).length ? Object.keys(grupos).map(a => {
+    const fs = grupos[a];
+    const total = CAT.lista.filter(f => f.area === a).length;
+    const tiene = ya ? CAT.lista.filter(f => f.area === a && ya.has(catNorm(f.funcion))).length : 0;
+    const marc = fs.filter(f => CAT.sel.has(f.id)).length;
+    return '<section class="catgr"><header class="catgrupo"><label class="chk"><input type="checkbox" data-grupo="' + esc(a) + '"' + (marc && marc === fs.length ? ' checked' : '') + '><b>' + esc(a) + '</b></label><small>' + fs.length + (fs.length === 1 ? ' función' : ' funciones') + (marc ? ' · ' + marc + ' marcadas' : '') + (ya ? ' · ' + tiene + ' de ' + total + ' en su perfil' : '') + '</small>' + (ya ? '<span class="catbar" title="' + tiene + ' de ' + total + ' funciones de esta área ya están en su perfil"><i style="width:' + Math.round(100 * tiene / Math.max(1, total)) + '%"></i></span>' : '') + '</header>' + fs.map(f => {
+      const t = CAT.tipo[f.id] || f.tipo;
+      const esta = ya && ya.has(catNorm(f.funcion));
+      const n = f.descripcion.split('\n').filter(x => x.trim()).length;
+      return '<article class="catf' + (CAT.sel.has(f.id) ? ' sel' : '') + (esta ? ' ya' : '') + '" data-id="' + esc(f.id) + '"><label class="catchk"><input type="checkbox" data-sel' + (CAT.sel.has(f.id) ? ' checked' : '') + ' aria-label="Marcar ' + esc(f.funcion) + '"></label><div class="catcu"><div class="catt"><b>' + esc(f.funcion) + '</b>' + (esta ? '<span class="chip ok">Ya en su perfil</span>' : '') + '</div><div class="catmeta"><select data-tipo aria-label="Tipo">' + tn.map(x => '<option' + (x === t ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select>' + f.perfiles.map(p => '<span class="catp">' + esc(p) + '</span>').join('') + '</div>' + (f.fuente ? '<small class="catfu">' + esc(f.fuente) + '</small>' : '') + '<details><summary>Ver tareas (' + n + ')</summary><p>' + esc(f.descripcion) + '</p></details></div><div class="catbtn"><button type="button" class="btn sec mini2" data-uno>Agregar</button><button type="button" class="enlace catq" data-quitarcat>Quitar del catálogo</button></div></article>';
+    }).join('') + '</section>';
+  }).join('') : '<p class="vacio">Ninguna función coincide con los filtros.</p>';
+  $('catCuenta').textContent = vis.length + ' de ' + CAT.lista.length + ' funciones' + (CAT.sel.size ? ' · ' + CAT.sel.size + ' marcadas' : '');
+  catResumen();
+}
+
+function catDestinos() {
+  const q = sinTilde($('catDestBuscar').value);
+  const ps = LISTA.filter(p => !q || sinTilde(p.nombre + ' ' + p.sucursal + ' ' + p.cargos.join(' ') + ' ' + p.unidad + ' ' + p.rut).indexOf(q) >= 0);
+  const orden = ps.slice().sort((a, b) => (CAT.dest.has(b.id) ? 1 : 0) - (CAT.dest.has(a.id) ? 1 : 0) || a.nombre.localeCompare(b.nombre));
+  $('catDest').innerHTML = orden.length ? orden.map(p => '<label class="catd' + (CAT.dest.has(p.id) ? ' on' : '') + '"><input type="checkbox" value="' + esc(p.id) + '"' + (CAT.dest.has(p.id) ? ' checked' : '') + '><span><b>' + esc(p.nombre) + '</b><small>' + esc(p.sucursal + ' · ' + (p.cargos.join(', ') || 'Sin cargo') + ' · ' + p.nFunciones + ' funciones') + '</small></span></label>').join('') : '<p class="mini">' + (LISTA.length ? 'Sin coincidencias.' : 'No hay colaboradores con registro enviado.') + '</p>';
+  catResumen();
+}
+
+function catResumen() {
+  const n = CAT.sel.size;
+  const m = CAT.dest.size;
+  $('catResumen').innerHTML = '<b>' + n + '</b> ' + (n === 1 ? 'función marcada' : 'funciones marcadas') + ' · <b>' + m + '</b> ' + (m === 1 ? 'colaborador' : 'colaboradores');
+  $('catAgregar').disabled = !n || !m;
+  $('catAgregar').textContent = n && m ? 'Agregar ' + n + (n === 1 ? ' función' : ' funciones') + (m > 1 ? ' a ' + m + ' perfiles' : ' al perfil') : 'Agregar al perfil';
+}
+
+function catFuncionesDe(ids) {
+  return (CAT.lista || []).filter(f => ids.indexOf(f.id) >= 0).map(f => ({ tipo: CAT.tipo[f.id] || f.tipo, funcion: f.funcion, descripcion: f.descripcion }));
+}
+
+async function catEnviar(ids, confirmar) {
+  const fs = catFuncionesDe(ids);
+  const dest = Array.from(CAT.dest);
+  if (!dest.length) { toast('Elija primero a qué colaborador agregar.', true); $('catDestBuscar').focus(); return; }
+  const nombres = dest.map(id => (LISTA.find(p => p.id === id) || {}).nombre || id);
+  const ejecutar = async b => {
+    if (b) b.disabled = true;
+    const j = await api('complementarLote', { sesion: SESION, ids: dest, funciones: fs, duplicados: $('catDup').checked }, 120000);
+    if (b) b.disabled = false;
+    if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+    dest.forEach(id => { delete CAT.ya[id]; });
+    if (fs.length > 1) CAT.sel.clear();
+    await catCargarYa();
+    catRender();
+    cargarLista().then(catDestinos);
+    const r = j.resultados;
+    const tot = r.reduce((s, x) => s + (x.agregadas || 0), 0);
+    if (!confirmar && r.length === 1 && r[0].ok) {
+      toast(r[0].agregadas ? 'Función agregada al perfil de ' + r[0].nombre + '.' : 'Esa función ya estaba en el perfil de ' + r[0].nombre + '.', !r[0].agregadas);
+      return;
+    }
+    dialogo('Funciones agregadas', '<p>Se agregaron <b>' + tot + '</b> funciones complementarias en total.</p><div class="tabla-wrap"><table class="tabla catrt"><thead><tr><th>Colaborador</th><th>Agregadas</th><th>Omitidas (ya estaban)</th></tr></thead><tbody>' + r.map(x => '<tr><td>' + esc(x.nombre || x.id) + '</td><td>' + (x.ok ? x.agregadas : '<span class="mal">' + esc(x.mensaje) + '</span>') + '</td><td>' + (x.ok && x.omitidas.length ? x.omitidas.length + '<small>' + esc(x.omitidas.slice(0, 4).join(' · ') + (x.omitidas.length > 4 ? ' …' : '')) + '</small>' : x.ok ? '0' : '—') + '</td></tr>').join('') + '</tbody></table></div>', [{ txt: 'Cerrar' }].concat(dest.length === 1 ? [{ txt: 'Ver registro', cls: 'pri', fn: () => { cerrarModal('dlg'); irSub('reg'); abrirDetalle(dest[0]); } }] : []));
+  };
+  if (!confirmar) { ejecutar(null); return; }
+  dialogo('Agregar funciones complementarias', '<p>Se agregarán <b>' + fs.length + '</b> ' + (fs.length === 1 ? 'función' : 'funciones') + ' a <b>' + dest.length + '</b> ' + (dest.length === 1 ? 'perfil' : 'perfiles') + ':</p><p class="mini">' + esc(nombres.slice(0, 8).join(' · ') + (nombres.length > 8 ? ' y ' + (nombres.length - 8) + ' más' : '')) + '</p><p class="mini">Quedan marcadas como "agregadas por administración". ' + ($('catDup').checked ? 'Se agregarán aunque ya existan en el perfil.' : 'Las que ya estén en un perfil se omiten.') + '</p>', [{ txt: 'Cancelar' }, { txt: 'Agregar', cls: 'pri', fn: async b => { await ejecutar(b); if (!$('dlgTit').textContent.includes('agregadas')) cerrarModal('dlg'); } }]);
+}
+
+$('catLista').addEventListener('change', ev => {
+  const g = ev.target.closest('[data-grupo]');
+  if (g) {
+    const a = g.dataset.grupo;
+    catVisibles().filter(f => f.area === a).forEach(f => { if (g.checked) CAT.sel.add(f.id); else CAT.sel.delete(f.id); });
+    catRender();
+    return;
+  }
+  const art = ev.target.closest('.catf');
+  if (!art) return;
+  const id = art.dataset.id;
+  if (ev.target.matches('[data-sel]')) {
+    if (ev.target.checked) CAT.sel.add(id); else CAT.sel.delete(id);
+    art.classList.toggle('sel', ev.target.checked);
+    const sec = art.closest('.catgr');
+    const chks = sec.querySelectorAll('[data-sel]');
+    sec.querySelector('[data-grupo]').checked = Array.from(chks).every(x => x.checked);
+    $('catCuenta').textContent = catVisibles().length + ' de ' + CAT.lista.length + ' funciones' + (CAT.sel.size ? ' · ' + CAT.sel.size + ' marcadas' : '');
+    catResumen();
+  } else if (ev.target.matches('[data-tipo]')) {
+    CAT.tipo[id] = ev.target.value;
+  }
+});
+
+$('catLista').addEventListener('click', async ev => {
+  const art = ev.target.closest('.catf');
+  if (!art) return;
+  if (ev.target.closest('[data-uno]')) { catEnviar([art.dataset.id], CAT.dest.size > 1); return; }
+  if (ev.target.closest('[data-quitarcat]')) {
+    if (!confirm('¿Quitar esta función del catálogo? No se quita de los perfiles donde ya se agregó.')) return;
+    const j = await api('catalogoQuitar', { sesion: SESION, id: art.dataset.id });
+    if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+    CAT.lista = j.funciones || [];
+    CAT.sel.delete(art.dataset.id);
+    catFiltros();
+    catRender();
+  }
+});
+
+['catBuscar', 'catPerfil', 'catArea', 'catSinYa'].forEach(id => $(id).addEventListener(id === 'catBuscar' ? 'input' : 'change', catRender));
+
+$('catMarcarVis').addEventListener('click', () => { catVisibles().forEach(f => CAT.sel.add(f.id)); catRender(); });
+
+$('catLimpiar').addEventListener('click', () => { CAT.sel.clear(); catRender(); });
+
+$('catDestBuscar').addEventListener('input', catDestinos);
+
+$('catDest').addEventListener('change', async ev => {
+  const c = ev.target;
+  if (!c.matches('input[type=checkbox]')) return;
+  if (c.checked) CAT.dest.add(c.value); else CAT.dest.delete(c.value);
+  c.closest('.catd').classList.toggle('on', c.checked);
+  catResumen();
+  await catCargarYa();
+  catRender();
+});
+
+$('catDestTodos').addEventListener('click', () => { $('catDest').querySelectorAll('input[type=checkbox]').forEach(x => CAT.dest.add(x.value)); catDestinos(); catRender(); });
+
+$('catDestNinguno').addEventListener('click', () => { CAT.dest.clear(); catDestinos(); catRender(); });
+
+$('catAgregar').addEventListener('click', () => {
+  const ids = (CAT.lista || []).filter(f => CAT.sel.has(f.id)).map(f => f.id);
+  if (!ids.length) { toast('Marque al menos una función.', true); return; }
+  catEnviar(ids, true);
+});
+
+function catDesdeJSON(o) {
+  const ref = {};
+  (Array.isArray(o.perfiles) ? o.perfiles : []).forEach(p => { if (p && typeof p === 'object') ref[String(p.id)] = String(p.nombre || p.id); });
+  const lista = Array.isArray(o) ? o : (tomar(o, ['funciones', 'functions']) || []);
+  return lista.map((f, i) => {
+    const tareas = tomar(f, ['tareas', 'tasks']);
+    let d = tomar(f, ['descripcion', 'detalle', 'description']);
+    if (!d && Array.isArray(tareas)) d = descDe(tareas);
+    const pf = tomar(f, ['perfiles', 'perfil', 'cargos']);
+    return { id: limpio(tomar(f, ['id', 'codigo'])), area: limpio(tomar(f, ['area', 'grupo', 'categoria'])) || 'General', tipo: tipoDe(tomar(f, ['tipo', 'type'])), funcion: limpio(tomar(f, ['funcion', 'nombre', 'titulo', 'title'])), descripcion: limpio(d), perfiles: (Array.isArray(pf) ? pf : String(pf || '').split('|')).map(x => ref[String(x)] || limpio(x)).filter(String), fuente: limpio(tomar(f, ['fuente', 'origen'])) };
+  }).filter(f => f.funcion);
+}
+
+$('catFile').addEventListener('change', async () => {
+  const f = $('catFile').files[0];
+  $('catFile').value = '';
+  if (!f) return;
+  let o;
+  try { o = JSON.parse((await f.text()).replace(/^﻿/, '')); } catch (e) { toast('El archivo no es un JSON válido.', true); return; }
+  const fs = catDesdeJSON(o);
+  if (!fs.length) { toast('El archivo no trae funciones.', true); return; }
+  const malos = fs.filter(x => !x.tipo || x.descripcion.length < 5 || x.descripcion.length > 1500);
+  const areas = Array.from(new Set(fs.map(x => x.area)));
+  const actual = (CAT.lista || []).length;
+  const subir = async (modo, b) => {
+    b.disabled = true;
+    const j = await api('catalogoImportar', { sesion: SESION, modo: modo, funciones: fs }, 90000);
+    b.disabled = false;
+    if (!j.ok) { if (j.sesion !== false) $('catImpErr').textContent = j.mensaje; return; }
+    CAT.lista = j.funciones || [];
+    CAT.sel.clear();
+    CAT.tipo = {};
+    cerrarModal('dlg');
+    catFiltros();
+    catRender();
+    toast('Catálogo ' + (modo === 'reemplazar' ? 'reemplazado' : 'actualizado') + ': ' + j.nuevas + ' nuevas, ' + j.actualizadas + ' actualizadas.');
+  };
+  dialogo('Importar catálogo', '<p><b>' + esc(o.nombre || f.name) + '</b></p><p>' + fs.length + ' funciones en ' + areas.length + (areas.length === 1 ? ' área' : ' áreas') + ': ' + esc(areas.join(' · ')) + '.</p>' + (malos.length ? '<p class="errBloque">' + malos.length + ' funciones tienen un tipo que no existe en la configuración o una descripción fuera de rango: ' + esc(malos.slice(0, 5).map(x => x.funcion).join(' · ')) + '. Corríjalas en el archivo antes de importar.</p>' : '') + (actual ? '<p class="mini">El catálogo actual tiene ' + actual + ' funciones. "Agregar o actualizar" conserva las existentes y actualiza las que tengan el mismo ID o nombre; "Reemplazar" deja solo las del archivo.</p>' : '') + '<p id="catImpErr" class="errBloque"></p>', [{ txt: 'Cancelar' }].concat(malos.length ? [] : (actual ? [{ txt: 'Reemplazar', cls: 'sec', fn: b => subir('reemplazar', b) }] : []).concat([{ txt: actual ? 'Agregar o actualizar' : 'Importar', cls: 'pri', fn: b => subir('agregar', b) }])));
+});
+
+$('catBajar').addEventListener('click', () => {
+  const l = CAT.lista || [];
+  if (!l.length) { toast('El catálogo está vacío.', true); return; }
+  bajarTexto('catalogo funciones complementarias.json', JSON.stringify({ formato: 'lf-catalogo', version: 1, nombre: 'Catálogo de funciones complementarias', fecha: hoy(), perfiles: Array.from(new Set([].concat.apply([], l.map(f => f.perfiles)))), areas: Array.from(new Set(l.map(f => f.area))), funciones: l.map(f => ({ id: f.id, area: f.area, tipo: f.tipo, funcion: f.funcion, descripcion: f.descripcion, perfiles: f.perfiles, fuente: f.fuente })) }, null, 2));
+});
+
+$('detCat').addEventListener('click', () => {
+  if (sucio && !confirm('Tiene cambios sin guardar en la revisión. ¿Ir al catálogo de todos modos?')) return;
+  sucio = false;
+  CAT.dest = new Set([DET.id]);
+  $('catDestBuscar').value = '';
+  $('dDetalle').hidden = true;
+  $('dPanel').hidden = false;
+  irSub('cat');
+  window.scrollTo(0, 0);
 });
 
 
