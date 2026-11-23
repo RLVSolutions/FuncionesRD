@@ -840,6 +840,30 @@ body>*:not(#print){display:none!important}
 .catrt .mal{color:var(--err)}
 @media (max-width:980px){.catgrid{grid-template-columns:1fr}.catder{position:static;max-height:none}.catdest{max-height:40vh}.catfil{grid-template-columns:1fr}}
 @media (max-width:600px){.catf{grid-template-columns:24px minmax(0,1fr)}.catbtn{grid-column:2;flex-direction:row;justify-content:space-between;align-items:center}.catbar{flex-basis:100%;margin-left:0}}
+.ddat dd.edit,#detNombre{cursor:text;border-radius:6px;transition:background .15s}
+.ddat dd.edit:hover,#detNombre:hover{background:var(--acc-soft)}
+.decl [data-edf]{cursor:text;border-radius:4px}
+.decl h3[data-edf]:hover,.decl p[data-edf]:hover{background:var(--acc-soft);box-shadow:0 0 0 4px var(--acc-soft)}
+.decl .chip[data-edf]:hover{outline:2px solid var(--acc)}
+.chip.edt{background:var(--mark-soft);color:var(--mark)}
+.ied{display:flex;flex-direction:column;gap:6px;width:100%}
+.ied-h{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
+.ied-h input{flex:1 1 260px;font-size:1.1rem;font-weight:700}
+.ied textarea{font-size:.9rem;line-height:1.45}
+.iedb{display:flex;gap:6px;flex-wrap:wrap}
+.detcon p{margin:6px 0}
+.conok{background:var(--ok-soft);color:var(--ok);border-radius:8px;padding:8px 10px}
+.conpend{background:var(--warn-soft);color:var(--warn);border-radius:8px;padding:8px 10px}
+.rvok{margin-top:12px}
+.rvlista{margin:6px 0 0;padding-left:20px}
+.rvlista li{margin:0 0 4px}
+.wslink{display:flex;gap:8px}
+.wslink input{flex:1;font-family:var(--mono);font-size:.8rem}
+.pill.porconf{background:var(--warn-soft);color:var(--warn);margin-left:4px}
+.pdoc tr.pcamb td{background:#fff6dd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#vRev .tarjeta{margin-bottom:16px}
+#rvPerfil.pprev{max-height:none;overflow:visible;border:0;padding:0;background:transparent}
+#vRev h1{margin:0 0 4px}
 </style>
 </head>
 <body>
@@ -997,6 +1021,19 @@ body>*:not(#print){display:none!important}
 <section id="pIns" class="tarjeta"><div id="pInsCont"></div></section>
 </main>
 
+<main id="vRev" class="shell" hidden>
+<section class="tarjeta"><h1 id="rvTit">Revisión de su perfil</h1><p class="sub" id="rvSub" style="margin:0"></p><div id="rvAviso"></div></section>
+<section class="tarjeta"><div id="rvCambios"></div></section>
+<section class="tarjeta"><div id="rvPerfil" class="pprev"></div></section>
+<section class="tarjeta" id="rvConf" hidden>
+<h2>Toma de conocimiento</h2>
+<div id="rvForm">
+<p class="sub" style="margin:0 0 10px">Al confirmar, queda registrado que revisó su perfil y conoce sus funciones. Si no está de acuerdo con algún cambio, indíquelo en las observaciones.</p>
+<div class="campo"><label for="rvCom">Observaciones (opcional)</label><textarea id="rvCom" rows="3" maxlength="1000" placeholder="Comentarios sobre los cambios o su perfil"></textarea></div>
+</div>
+<div class="dacc"><button type="button" id="rvPdf" class="btn sec">Descargar PDF</button><button type="button" class="btn txt" data-acc="modificar">Modificar mi registro con mi clave</button><button type="button" id="rvOk" class="btn pri">Tomo conocimiento</button></div>
+</section>
+</main>
 <main id="vDash" class="shell" hidden>
 <section id="dLogin" class="tarjeta login">
 <h1>Acceso a Datos</h1>
@@ -1135,12 +1172,15 @@ body>*:not(#print){display:none!important}
 <div class="dacc"><button type="button" id="detPdf" class="btn sec">Reporte de revisión (PDF)</button><button type="button" id="detClave" class="btn sec">Generar nueva clave</button><button type="button" id="detGuardar" class="btn pri">Guardar revisión</button></div>
 </div>
 <div class="detgrid">
-<section class="tarjeta"><h2>Datos declarados</h2><dl class="ddat" id="detDatos"></dl></section>
+<section class="tarjeta"><h2>Datos declarados</h2><p class="mini" style="margin:-6px 0 8px">Haga clic en el nombre, en un dato o en una función para editarlo.</p><dl class="ddat" id="detDatos"></dl></section>
 <section class="tarjeta">
 <h2>Revisión</h2>
 <div class="campo"><label for="detEstado">Estado</label><select id="detEstado"></select></div>
 <p class="mini" id="detFRev"></p>
 <p class="mini" id="detClaveInfo"></p>
+<h3 style="margin-top:14px">Toma de conocimiento</h3>
+<div id="detCon" class="detcon"></div>
+<button type="button" id="detWsp" class="btn sec ancho">Compartir revisión por WhatsApp</button>
 <h3 style="margin-top:14px">Historial de versiones</h3>
 <ul class="hist" id="detHist"></ul>
 </section>
@@ -1284,7 +1324,7 @@ document.addEventListener('click', ev => {
 });
 
 function mostrar(ids) {
-  ['carga', 'falla', 'conexion', 'vIngreso', 'vExito', 'vPanel', 'vCal', 'vIns', 'vDash'].forEach(x => { $(x).hidden = ids.indexOf(x) < 0; });
+  ['carga', 'falla', 'conexion', 'vIngreso', 'vExito', 'vPanel', 'vCal', 'vIns', 'vDash', 'vRev'].forEach(x => { $(x).hidden = ids.indexOf(x) < 0; });
 }
 
 function irTab(t, sinScroll) {
@@ -1378,7 +1418,8 @@ function iniciar() {
   toggleOtro();
   renderFunciones();
   modoUI();
-  irTab({ '#ingreso': 'ingreso', '#datos': 'datos', '#calendario': 'cal', '#instructivo': 'ins' }[location.hash] || 'dash', true);
+  if (REV) abrirRevision(REV);
+  else irTab({ '#ingreso': 'ingreso', '#datos': 'datos', '#calendario': 'cal', '#instructivo': 'ins' }[location.hash] || 'dash', true);
   if (rutValido($('rut').value)) verificarRut();
 }
 
@@ -3219,7 +3260,7 @@ function filtrada() {
 function renderTabla() {
   const l = filtrada();
   $('fCuenta').textContent = l.length + ' de ' + LISTA.length;
-  $('tBody').innerHTML = l.length ? l.map(p => '<tr tabindex="0" data-id="' + esc(p.id) + '"><td data-l="Nombre" class="nom">' + esc(p.nombre) + '</td><td data-l="ID" class="mono">' + esc(p.id) + '</td><td data-l="Sucursal">' + esc(p.sucursal) + '</td><td data-l="Área">' + esc(p.unidad || '') + '</td><td data-l="Cargo(s)">' + esc(p.cargos.join(', ')) + '</td><td data-l="Funciones" class="n">' + p.nFunciones + '</td><td data-l="Precisiones" class="n">' + p.nPrecisiones + '</td><td data-l="Actualizado">' + esc(p.fecha) + (p.version > 1 ? ' <span class="chip">v' + p.version + '</span>' : '') + '</td><td data-l="Estado"><span class="pill ' + esc(p.estado) + '">' + esc(p.estado) + '</span></td></tr>').join('') : '<tr><td colspan="9" class="vacio" style="cursor:default">' + (LISTA.length ? 'No hay resultados con estos filtros.' : 'Aún no hay registros. Cuando los trabajadores envíen el formulario aparecerán aquí.') + '</td></tr>';
+  $('tBody').innerHTML = l.length ? l.map(p => '<tr tabindex="0" data-id="' + esc(p.id) + '"><td data-l="Nombre" class="nom">' + esc(p.nombre) + '</td><td data-l="ID" class="mono">' + esc(p.id) + '</td><td data-l="Sucursal">' + esc(p.sucursal) + '</td><td data-l="Área">' + esc(p.unidad || '') + '</td><td data-l="Cargo(s)">' + esc(p.cargos.join(', ')) + '</td><td data-l="Funciones" class="n">' + p.nFunciones + '</td><td data-l="Precisiones" class="n">' + p.nPrecisiones + '</td><td data-l="Actualizado">' + esc(p.fecha) + (p.version > 1 ? ' <span class="chip">v' + p.version + '</span>' : '') + '</td><td data-l="Estado"><span class="pill ' + esc(p.estado) + '">' + esc(p.estado) + '</span>' + (p.porConfirmar ? '<span class="pill porconf" title="Modificado por la administración; el colaborador aún no toma conocimiento">Por confirmar</span>' : '') + '</td></tr>').join('') : '<tr><td colspan="9" class="vacio" style="cursor:default">' + (LISTA.length ? 'No hay resultados con estos filtros.' : 'Aún no hay registros. Cuando los trabajadores envíen el formulario aparecerán aquí.') + '</td></tr>';
 }
 
 ['fTexto', 'fSuc', 'fEstado'].forEach(id => $(id).addEventListener('input', renderTabla));
@@ -3246,19 +3287,21 @@ function renderDetalle() {
   const r = DET;
   $('detNombre').textContent = r.nombre;
   $('detSub').textContent = 'ID ' + r.id + ' · ' + r.rut + ' · versión ' + r.version + ' del ' + r.fecha;
-  const c = (k, v) => '<div><dt>' + esc(k) + '</dt><dd>' + esc(v || '—') + '</dd></div>';
-  $('detDatos').innerHTML = c('Sucursal', r.sucursal) + c('Área funcional', r.unidad) + c('Cargo(s) contractual(es)', r.cargos.join(', ')) + c('Jefatura o dependencia', r.jefatura) + c('Teléfono', r.telefono) + c('Correo', r.correo) + c('Origen', r.origen === 'Manual' ? 'Formulario en papel' + (r.folio ? ' · folio ' + r.folio : '') + (r.transcrito ? ' · transcrito por ' + r.transcrito : '') : r.origen === ORIG_IMP ? 'Importado desde archivo por la administración' : 'Formulario web');
+  const c = (k, v, ed) => '<div><dt>' + esc(k) + '</dt><dd' + (ed ? ' data-ed="' + ed + '" class="edit" title="Clic para editar"' : '') + '>' + esc(v || '—') + '</dd></div>';
+  $('detNombre').title = 'Clic para editar el nombre';
+  $('detDatos').innerHTML = c('Sucursal', r.sucursal, 'sucursal') + c('Área funcional', r.unidad, 'unidad') + c('Cargo(s) contractual(es)', r.cargos.join(', '), 'cargos') + c('Jefatura o dependencia', r.jefatura, 'jefatura') + c('Teléfono', r.telefono, 'telefono') + c('Correo', r.correo, 'correo') + c('Origen', r.origen === 'Manual' ? 'Formulario en papel' + (r.folio ? ' · folio ' + r.folio : '') + (r.transcrito ? ' · transcrito por ' + r.transcrito : '') : r.origen === ORIG_IMP ? 'Importado desde archivo por la administración' : 'Formulario web');
   selValor($('detEstado'), r.estado);
   $('detFRev').textContent = r.fRev ? 'Última revisión guardada: ' + r.fRev : 'Aún no se guarda una revisión para esta versión.';
   $('detClaveInfo').textContent = r.clave ? 'El trabajador tiene clave asignada para modificar su registro.' : 'El trabajador no tiene clave. Genere una para que pueda modificar su registro.';
   $('detHist').innerHTML = (r.historial || []).map(h => '<li><b>Versión ' + h.version + '</b> · ' + esc(h.fecha) + ' · ' + esc(h.origen) + (h.vigente ? ' · vigente' : '') + '</li>').join('');
-  $('detFunciones').innerHTML = r.funciones.map(f => '<article class="rev' + (f.origen === ORIG_ADM ? ' radm' : '') + '"><div class="decl"><span class="etq">' + (f.origen === ORIG_ADM ? 'Complementaria · función ' : 'Declarado · función ') + f.n + '</span><h3>' + esc(f.funcion) + '</h3><div class="chipsI"><span class="chip">' + esc(f.tipo) + '</span>' + (f.origen === ORIG_ADM ? '<span class="chip adm">Agregada por administración</span><button type="button" class="quitar" data-quitar-compl="' + f.n + '">Quitar</button>' : f.origen === ORIG_IMP ? '<span class="chip imp">Importada</span>' : '') + '</div><p>' + esc(f.descripcion) + '</p></div><div class="prec"><label class="etq" for="p' + f.n + '">Precisión de revisión</label><textarea id="p' + f.n + '" data-n="' + f.n + '" maxlength="1500" rows="4" placeholder="Observaciones, precisiones o correcciones a esta función">' + esc(f.precision || '') + '</textarea></div></article>').join('');
+  $('detFunciones').innerHTML = r.funciones.map(f => '<article class="rev' + (f.origen === ORIG_ADM ? ' radm' : '') + '"><div class="decl" data-n="' + f.n + '"><span class="etq">' + (f.origen === ORIG_ADM ? 'Complementaria · función ' : 'Declarado · función ') + f.n + '</span><h3 data-edf="fun" title="Clic para editar">' + esc(f.funcion) + '</h3><div class="chipsI"><span class="chip" data-edf="tipo" title="Clic para cambiar el tipo">' + esc(f.tipo) + '</span>' + (f.origen === ORIG_ADM ? '<span class="chip adm">Agregada por administración</span><button type="button" class="quitar" data-quitar-compl="' + f.n + '">Quitar</button>' : f.origen === ORIG_IMP ? '<span class="chip imp">Importada</span>' : '') + (f.editado && f.origen !== ORIG_ADM ? '<span class="chip edt" title="Editada el ' + esc(f.editado) + '">Editada por administración</span>' : '') + '</div><p data-edf="desc" title="Clic para editar">' + esc(f.descripcion) + '</p></div><div class="prec"><label class="etq" for="p' + f.n + '">Precisión de revisión</label><textarea id="p' + f.n + '" data-n="' + f.n + '" maxlength="1500" rows="4" placeholder="Observaciones, precisiones o correcciones a esta función">' + esc(f.precision || '') + '</textarea></div></article>').join('');
   $('detComTrab').textContent = r.comentarios || 'Sin comentarios.';
   $('detComRev').value = r.comRev || '';
   renderAdjDet();
+  renderConocimiento();
 }
 
-$('dDetalle').addEventListener('input', ev => { if (ev.target.matches('textarea,select')) sucio = true; });
+$('dDetalle').addEventListener('input', ev => { if (ev.target.matches('textarea,select') && !ev.target.closest('.ied') && !ev.target.closest('#wsMsg')) sucio = true; });
 
 $('volver').addEventListener('click', () => {
   if (sucio && !confirm('Tiene cambios sin guardar. ¿Volver al listado de todos modos?')) return;
@@ -4356,7 +4399,7 @@ function perfilHTML(d, meta) {
   const fun = grupos.map(t => {
     const l = d.funciones.filter(f => f.tipo === t && (f.funcion || f.descripcion));
     if (!l.length) return '';
-    return '<h3 class="pgt">' + esc(lbl(t)) + ' <small>(' + l.length + ')</small></h3><table><tbody>' + l.map(f => '<tr><td class="nn">' + (++n) + '</td><td><b>' + esc(f.funcion) + '</b>' + (f.origen === ORIG_ADM ? '<span class="padm">Agregada por administración</span>' : '') + (f.descripcion && f.descripcion !== f.funcion ? '<div class="fd">' + esc(f.descripcion) + '</div>' : '') + '</td></tr>').join('') + '</tbody></table>';
+    return '<h3 class="pgt">' + esc(lbl(t)) + ' <small>(' + l.length + ')</small></h3><table><tbody>' + l.map(f => '<tr' + (f.cambio ? ' class="pcamb"' : '') + '><td class="nn">' + (++n) + '</td><td><b>' + esc(f.funcion) + '</b>' + (f.origen === ORIG_ADM ? '<span class="padm">Agregada por administración</span>' : '') + (f.cambio === 'modificada' ? '<span class="padm">Modificada por administración</span>' : '') + (f.descripcion && f.descripcion !== f.funcion ? '<div class="fd">' + esc(f.descripcion) + '</div>' : '') + '</td></tr>').join('') + '</tbody></table>';
   }).join('');
   const sinTipo = d.funciones.filter(f => !f.tipo && (f.funcion || f.descripcion));
   const seg = meta.sinSeg ? '' : meta.id ? '<div class="pseg"><div><span>ID de registro</span><b>' + esc(meta.id) + '</b></div><div><span>Clave de seguimiento</span><b>' + esc(meta.clave || '········') + '</b></div><p>' + (meta.clave ? 'Conserve su ID y su clave: con ellos revisa, modifica o actualiza este perfil.' : 'La clave se entregó al guardar por primera vez; no se muestra por seguridad.') + '</p></div>' : '<div class="pseg pend"><p><b>Código de seguimiento:</b> se asignará un ID y una clave al guardar el avance o enviar el registro.</p></div>';
@@ -6156,7 +6199,189 @@ $('detCat').addEventListener('click', () => {
 });
 
 
+let REV = '';
+let REVREG = null;
+
+function telWsp(t) {
+  let d = String(t || '').replace(/\D/g, '');
+  if (d.length === 8) d = '569' + d;
+  else if (d.length === 9 && d[0] === '9') d = '56' + d;
+  return d.length >= 10 ? d : '';
+}
+
+function precisionesActuales() {
+  const o = {};
+  (DET.funciones || []).forEach(f => { const t = $('p' + f.n); if (t) o[f.n] = t.value; });
+  return { prec: o, com: $('detComRev').value, estado: $('detEstado').value };
+}
+
+function aplicarDetalle(r) {
+  const k = precisionesActuales();
+  DET = r;
+  DET.funciones.forEach(f => { if (f.n in k.prec) f.precision = k.prec[f.n]; });
+  DET.comRev = k.com;
+  const estado = k.estado;
+  renderDetalle();
+  selValor($('detEstado'), estado);
+}
+
+async function guardarEdicion(datos, funciones, b) {
+  if (b) b.disabled = true;
+  const j = await api('editar', { sesion: SESION, id: DET.id, datos: datos || {}, funciones: funciones || [] });
+  if (b) b.disabled = false;
+  if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return false; }
+  aplicarDetalle(j.registro);
+  toast(j.sinCambios ? 'No había cambios que guardar.' : 'Cambio guardado. El colaborador quedará pendiente de tomar conocimiento.');
+  return true;
+}
+
+const ED_DATOS = { sucursal: 'Sucursal', unidad: 'Área funcional', cargos: 'Cargo(s) contractual(es)', jefatura: 'Jefatura o dependencia', telefono: 'Teléfono', correo: 'Correo' };
+
+$('detDatos').addEventListener('click', ev => {
+  const dd = ev.target.closest('dd[data-ed]');
+  if (!dd || dd.querySelector('.ied')) return;
+  const k = dd.dataset.ed;
+  const v = k === 'cargos' ? DET.cargos.join(', ') : (DET[k] || '');
+  let ctl;
+  if (k === 'sucursal') ctl = '<select data-v>' + CFG.sucursales.map(x => '<option' + (x === v ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select>';
+  else if (k === 'unidad') ctl = '<select data-v>' + unidades().concat(v && unidades().indexOf(v) < 0 ? [v] : []).map(x => '<option' + (x === v ? ' selected' : '') + '>' + esc(x) + '</option>').join('') + '</select>';
+  else ctl = '<input data-v value="' + esc(v) + '" maxlength="' + (k === 'cargos' ? 300 : 120) + '"' + (k === 'cargos' ? ' list="edCargos" placeholder="Separe los cargos con coma"' : '') + '>' + (k === 'cargos' ? '<datalist id="edCargos">' + CFG.cargos.map(x => '<option value="' + esc(x) + '">').join('') + '</datalist>' : '');
+  dd.innerHTML = '<div class="ied">' + ctl + '<div class="iedb"><button type="button" class="btn pri mini2" data-ok>Guardar</button><button type="button" class="btn txt mini2" data-no>Cancelar</button></div></div>';
+  const inp = dd.querySelector('[data-v]');
+  inp.focus();
+  const cerrar = () => renderDetalle();
+  const ok = async b => {
+    const val = inp.value;
+    const datos = {};
+    datos[k] = k === 'cargos' ? val.split(',').map(x => x.trim()).filter(String) : val;
+    if (await guardarEdicion(datos, null, b) === false) inp.focus();
+  };
+  dd.querySelector('[data-ok]').addEventListener('click', e => ok(e.currentTarget));
+  dd.querySelector('[data-no]').addEventListener('click', cerrar);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(dd.querySelector('[data-ok]')); } else if (e.key === 'Escape') cerrar(); });
+});
+
+$('detNombre').addEventListener('click', () => {
+  if ($('detNombre').querySelector('.ied') || !DET) return;
+  $('detNombre').innerHTML = '<span class="ied ied-h"><input data-v value="' + esc(DET.nombre) + '" maxlength="120" aria-label="Nombre completo"><span class="iedb"><button type="button" class="btn pri mini2" data-ok>Guardar</button><button type="button" class="btn txt mini2" data-no>Cancelar</button></span></span>';
+  const inp = $('detNombre').querySelector('[data-v]');
+  inp.focus();
+  const ok = b => guardarEdicion({ nombre: inp.value }, null, b);
+  $('detNombre').querySelector('[data-ok]').addEventListener('click', e => { e.stopPropagation(); ok(e.currentTarget); });
+  $('detNombre').querySelector('[data-no]').addEventListener('click', e => { e.stopPropagation(); renderDetalle(); });
+  inp.addEventListener('click', e => e.stopPropagation());
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok($('detNombre').querySelector('[data-ok]')); } else if (e.key === 'Escape') renderDetalle(); });
+});
+
+$('detFunciones').addEventListener('click', ev => {
+  if (ev.target.closest('[data-quitar-compl]') || ev.target.closest('.ied')) return;
+  const el = ev.target.closest('.decl [data-edf]');
+  if (!el) return;
+  const decl = el.closest('.decl');
+  const n = Number(decl.dataset.n);
+  const f = DET.funciones.find(x => x.n === n);
+  if (!f) return;
+  decl.innerHTML = '<span class="etq">Editando función ' + n + '</span><div class="ied ied-f"><label class="etq" for="edT' + n + '">Tipo</label><select id="edT' + n + '">' + CFG.tipos.map(t => '<option' + (t.nombre === f.tipo ? ' selected' : '') + '>' + esc(t.nombre) + '</option>').join('') + '</select><label class="etq" for="edF' + n + '">Función</label><input id="edF' + n + '" maxlength="200" value="' + esc(f.funcion) + '"><label class="etq" for="edD' + n + '">Descripción / tareas</label><textarea id="edD' + n + '" maxlength="1500" rows="' + Math.min(14, Math.max(4, f.descripcion.split('\n').length + 1)) + '">' + esc(f.descripcion) + '</textarea><small class="ayuda" id="edC' + n + '">' + f.descripcion.length + '/1500 · Una tarea por línea; puede empezar cada línea con "•".</small><div class="iedb"><button type="button" class="btn pri mini2" data-ok>Guardar cambios</button><button type="button" class="btn txt mini2" data-no>Cancelar</button></div></div>';
+  const ta = $('edD' + n);
+  ta.addEventListener('input', () => { $('edC' + n).textContent = ta.value.length + '/1500 · Una tarea por línea; puede empezar cada línea con "•".'; });
+  const target = el.dataset.edf === 'tipo' ? $('edT' + n) : el.dataset.edf === 'desc' ? ta : $('edF' + n);
+  target.focus();
+  decl.querySelector('[data-no]').addEventListener('click', () => renderDetalle());
+  decl.querySelector('[data-ok]').addEventListener('click', e => guardarEdicion(null, [{ n: n, tipo: $('edT' + n).value, funcion: $('edF' + n).value, descripcion: ta.value }], e.currentTarget));
+  decl.addEventListener('keydown', e => { if (e.key === 'Escape') renderDetalle(); });
+});
+
+function renderConocimiento() {
+  const r = DET;
+  const box = $('detCon');
+  if (!box) return;
+  box.innerHTML = r.modificado
+    ? (r.conocimiento
+      ? '<p class="conok"><b>Tomó conocimiento</b> el ' + esc(r.conocimiento) + ' de los cambios del ' + esc(r.modificado) + '.</p>' + (r.conCom ? '<p class="mini">Su comentario: "' + esc(r.conCom) + '"</p>' : '')
+      : '<p class="conpend"><b>Pendiente de toma de conocimiento.</b> Modificado por la administración el ' + esc(r.modificado) + '.</p>' + (r.modDet ? '<p class="mini">' + esc(r.modDet) + '</p>' : ''))
+    : '<p class="mini">Sin modificaciones de la administración en esta versión. Para editar, haga clic sobre un dato o una función.</p>';
+}
+
+$('detWsp').addEventListener('click', async () => {
+  const b = $('detWsp');
+  b.disabled = true;
+  const j = await api('revisionLink', { sesion: SESION, id: DET.id });
+  b.disabled = false;
+  if (!j.ok) { if (j.sesion !== false) toast(j.mensaje, true); return; }
+  const link = enlace().replace(/&ir=ingreso$/, '') + '&rev=' + j.tok;
+  const nom = (DET.nombre || '').split(/\s+/)[0];
+  const nomP = nom ? nom.charAt(0).toUpperCase() + nom.slice(1).toLowerCase() : '';
+  const emp = limpio(CFG.empresa) || 'la empresa';
+  const msg = 'Hola' + (nomP ? ' ' + nomP : '') + ', la administración ' + (DET.modificado ? 'revisó y actualizó' : 'revisó') + ' tu perfil de funciones del Levantamiento de Funciones de ' + emp + '.\n\nPor favor revísalo y confirma que tomaste conocimiento en este enlace:\n' + link + (DET.modDet && !DET.conocimiento ? '\n\nCambios: ' + DET.modDet : '') + '\n\nSi tienes dudas o no estás de acuerdo, puedes dejar tu comentario al confirmar.';
+  dialogo('Compartir revisión por WhatsApp', '<p class="sub" style="margin:0 0 12px">El enlace abre el perfil de <b>' + esc(DET.nombre) + '</b> en modo lectura, con los cambios destacados y el botón "Tomo conocimiento". No pide ID ni clave: envíelo solo a esta persona.</p><div class="campo"><label for="wsTel">WhatsApp del colaborador</label><input id="wsTel" inputmode="tel" value="' + esc(j.telefono || '') + '" placeholder="+56 9 1234 5678"><small class="ayuda">Si lo deja vacío, WhatsApp le pedirá elegir el contacto.</small></div><div class="campo"><label for="wsMsg">Mensaje</label><textarea id="wsMsg" rows="9" maxlength="1500">' + esc(msg) + '</textarea></div><div class="campo"><label for="wsLink">Enlace de revisión</label><div class="wslink"><input id="wsLink" readonly value="' + esc(link) + '"><button type="button" class="copiar" data-copia="wsLink">Copiar</button></div></div>' + (j.conocimiento ? '<p class="mini">Ya tomó conocimiento el ' + esc(j.conocimiento) + '. Si vuelve a modificar el registro, quedará pendiente otra vez.</p>' : ''), [{ txt: 'Cerrar' }, { txt: 'Copiar mensaje', cls: 'sec', fn: async () => { try { await navigator.clipboard.writeText($('wsMsg').value); toast('Mensaje copiado.'); } catch (e) { $('wsMsg').select(); document.execCommand('copy'); toast('Mensaje copiado.'); } } }, { txt: 'Abrir WhatsApp', cls: 'pri', fn: () => {
+    const t = telWsp($('wsTel').value);
+    window.open('https://wa.me/' + t + '?text=' + encodeURIComponent($('wsMsg').value), '_blank', 'noopener');
+  } }]);
+});
+
+async function abrirRevision(tok) {
+  tab = 'rev';
+  document.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', 'false'));
+  mostrar(['vRev']);
+  $('rvPerfil').innerHTML = '<p class="vacio">Cargando su perfil…</p>';
+  $('rvAviso').innerHTML = '';
+  $('rvCambios').innerHTML = '';
+  $('rvConf').hidden = true;
+  const j = await api('verRevision', { tok: tok });
+  if (!j.ok) {
+    $('rvTit').textContent = 'No se pudo abrir la revisión';
+    $('rvSub').textContent = '';
+    $('rvPerfil').innerHTML = '<p class="errBloque">' + esc(j.mensaje) + '</p>';
+    return;
+  }
+  REVREG = j.registro;
+  const r = REVREG;
+  $('rvTit').textContent = 'Revisión de su perfil de funciones';
+  $('rvSub').textContent = r.nombre + ' · ' + r.cargos.join(', ') + ' · ' + r.sucursal + ' · versión ' + r.version;
+  const cambiadas = r.funciones.filter(f => f.cambio);
+  const det = (r.modDet || '').split('; ').filter(String);
+  $('rvCambios').innerHTML = r.modificado
+    ? '<h2>Cambios realizados por la administración</h2><p class="sub" style="margin:0 0 8px">Modificado el ' + esc(r.modificado) + '. ' + (cambiadas.length ? 'Las funciones modificadas o agregadas aparecen destacadas en su perfil.' : '') + '</p>' + (det.length ? '<ul class="rvlista">' + det.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '')
+    : '<h2>Su perfil</h2><p class="sub" style="margin:0">La administración le pide revisar su perfil de funciones y confirmar que lo conoce.</p>';
+  const d = Object.assign({}, r, { telefono: '', correo: '' });
+  $('rvPerfil').innerHTML = perfilHTML(d, { id: r.id, sinSeg: true, estado: r.conocimiento ? 'Conocimiento confirmado' : 'Revisión', sub: 'Perfil revisado por la administración', pie: 'Perfil revisado por la administración' + (r.modificado ? ' el ' + r.modificado : '') + '.' });
+  rvEstado();
+}
+
+function rvEstado() {
+  const r = REVREG;
+  $('rvConf').hidden = false;
+  if (r.conocimiento) {
+    $('rvAviso').innerHTML = '<div class="conok rvok"><b>Ya tomó conocimiento</b> el ' + esc(r.conocimiento) + '.' + (r.conCom ? ' Su comentario: "' + esc(r.conCom) + '"' : '') + '</div>';
+    $('rvForm').hidden = true;
+  } else {
+    $('rvAviso').innerHTML = r.modificado ? '<div class="conpend rvok"><b>Pendiente:</b> revise los cambios y confirme al final de la página.</div>' : '';
+    $('rvForm').hidden = false;
+  }
+}
+
+$('rvOk').addEventListener('click', async () => {
+  const b = $('rvOk');
+  b.disabled = true;
+  const j = await api('conocimiento', { tok: REV, comentario: limpio($('rvCom').value) });
+  b.disabled = false;
+  if (!j.ok) { toast(j.mensaje, true); return; }
+  REVREG.conocimiento = j.fecha;
+  REVREG.conCom = limpio($('rvCom').value);
+  rvEstado();
+  toast('Gracias. Quedó registrado que tomó conocimiento de su perfil.');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+$('rvPdf').addEventListener('click', () => {
+  if (!REVREG) return;
+  imprimir($('rvPerfil').innerHTML, 'Perfil ' + REVREG.nombre);
+});
+
+
 (function conectar() {
+  const mr = location.hash.match(/[#&]rev=([0-9a-f]{32})/);
+  if (mr) REV = mr[1];
   const m = location.hash.match(/[#&]api=([^&]+)/);
   if (m) {
     let v = '';
@@ -6166,7 +6391,7 @@ $('detCat').addEventListener('click', () => {
     try { t = mt ? decodeURIComponent(mt[1]) : ''; } catch (e) { t = ''; }
     const u = apiDeCodigo(v);
     if (u) { guardarApi(u, t); ENLACE = true; }
-    try { history.replaceState(null, '', location.pathname + location.search + (/ir=ingreso|#ingreso/.test(location.hash) ? '#ingreso' : /datos/.test(location.hash) ? '#datos' : /calendario/.test(location.hash) ? '#calendario' : /instructivo/.test(location.hash) ? '#instructivo' : '')); } catch (e) {}
+    try { history.replaceState(null, '', location.pathname + location.search + (REV ? '#rev=' + REV : /ir=ingreso|#ingreso/.test(location.hash) ? '#ingreso' : /datos/.test(location.hash) ? '#datos' : /calendario/.test(location.hash) ? '#calendario' : /instructivo/.test(location.hash) ? '#instructivo' : '')); } catch (e) {}
   }
   const fin = () => {
     const c = window.LF_CONFIG || {};
